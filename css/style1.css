@@ -8,6 +8,6 @@ body{
     text-decoration: underline;
 }
 
-p{
+span p{
     display: inline;
 }
