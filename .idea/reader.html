@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/instascan.min.js"></script>
+    <title>QR Code Reader</title>
+</head>
+<body>
+
+    <button id="button" onclick="ScannerQR();">Click me to open the Scanner!</button>
+    <video id="preview"></video>
+    <button id="nextCamera">Next Camera</button>
+    <button id="prevCamera">Previous Camera</button>
+    <div style="margin: 20px; padding: 20px; background-color: black; color: white; text-align: center;" id="content"></div>
+
+
+    <script>
+        let currentCameraIndex = 0;
+        let cameras = [];
+        let scanner;
+
+        function ScannerQR() {
+            document.getElementById("button").style.display="none";
+            var opts = {
+                continuous: true,
+                video: document.getElementById('preview'),
+                mirror: false,
+                captureImage: false,
+                backgroundScan: true,
+                refractoryPeriod: 5000,
+                scanPeriod: 1
+            };
+            scanner = new Instascan.Scanner(opts);
+
+            Instascan.Camera.getCameras().then(function (availableCameras) {
+                cameras = availableCameras;
+                if (cameras.length > 0) {
+                    selectCamera(currentCameraIndex);
+                } else {
+                    console.error('No cameras found.');
+                    alert("No cameras found.");
+                }
+            }).catch(function (e) {
+                console.error(e);
+            });
+
+            scanner.addListener('scan', function (content) {
+                document.getElementById("preview").style.display="none";
+                console.log(content);
+                document.getElementById("content").innerHTML = content;
+            });
+        }
+
+        function selectCamera(index) {
+            scanner.start(cameras[index]);
+            document.getElementById('preview').style.display = 'block';
+        }
+
+        document.getElementById('nextCamera').addEventListener('click', function() {
+            if (cameras.length > 1) {
+                currentCameraIndex = (currentCameraIndex + 1) % cameras.length;
+                selectCamera(currentCameraIndex);
+            }
+        });
+
+        document.getElementById('prevCamera').addEventListener('click', function() {
+            if (cameras.length > 1) {
+                currentCameraIndex = (currentCameraIndex - 1 + cameras.length) % cameras.length;
+                selectCamera(currentCameraIndex);
+            }
+        });
+    </script>
+</body>
+</html>
