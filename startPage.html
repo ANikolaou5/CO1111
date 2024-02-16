@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start Page</title>
+    <link rel="stylesheet" href="css/style1.css">
+</head>
+<body>
+<h1 id="challengesTitle">Available Challenges</h1>
+<ul id="challenges"></ul>
+<script>
+    function getChallenges(){
+        fetch("https://codecyprus.org/th/api/list")
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+                console.log(jsonObject);
+                let challengesList = document.getElementById("challenges");
+                let treasureHuntsArray = jsonObject.treasureHunts;
+                for (let i = 0; i < treasureHuntsArray.length; i++){
+                    let listItem = document.createElement("li");
+                    const uuid = treasureHuntsArray[i].uuid;
+                    listItem.innerHTML = `<a href='start.html?player=Antri&app=TheTwoOfUsApp&treasure-hunt-id=${uuid}'>` + treasureHuntsArray[i].name + `</a>`;
+                    challengesList.appendChild(listItem);
+                }
+            });
+    }
+
+    getChallenges();
+</script>
+</body>
+</html>

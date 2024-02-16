@@ -1,3 +1,3 @@
 # CO1111
-Experiencing the WebStorm support for Git
-Cool Stuff!
+Team A5
+Members: Antri Nikolaou & Alena Gavrishchuk
