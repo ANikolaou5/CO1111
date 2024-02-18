@@ -33,16 +33,16 @@ span p{
     text-decoration: none;
 }
 
-.pirateBox{
+.pirate{
     margin-left: 100px;
 }
 
-#pirate{
+#pirateImg{
     width: 100px;
     height: 120px;
 }
 
-.pirateDialogue{
+.pirateText{
     font-size: 17px;
     position: absolute;
     border: 3px solid red;
