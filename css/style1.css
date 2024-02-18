@@ -12,6 +12,10 @@ body{
     text-align: center;
 }
 
+#startButton:hover{
+    color: #5d66ff;
+}
+
 #startButton{
     color: #8B0000;
     border: 2px solid #8B0000;
