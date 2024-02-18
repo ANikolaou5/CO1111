@@ -43,6 +43,10 @@ body{
     text-decoration: none;
 }
 
+#challenges a:hover {
+    color: #ff5a49;
+}
+
 .pirate{
     margin-left: 100px;
 }
