@@ -1,5 +1,21 @@
-body{
+body {
     font-family: Tahoma, sans-serif;
+    background-color: #F5F5F5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.content-container {
+    border: 2px solid #8B0000;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
 }
 
 #subheading{
@@ -12,15 +28,26 @@ body{
     text-align: center;
 }
 
-#startButton:hover{
-    color: #5d66ff;
+/*start button style*/
+#startButton{
+    color: white;
+    background: linear-gradient(45deg, #8B0000, #D52B1E);
+    border: none;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-#startButton{
-    color: #8B0000;
-    border: 2px solid #8B0000;
-    font-size: 20px;
+#startButton:hover{
+    background: linear-gradient(45deg, #D52B1E, #8B0000);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+    border: none;
 }
+
 
 #projectAims{
     display: inline;
@@ -61,4 +88,37 @@ body{
     position: absolute;
     border: 3px solid red;
     padding: 5px;
+}
+
+.twitter-widget {
+    margin: auto;
+    transform: scale(0.7);
+    transform-origin: center;
+}
+
+.custom-twitter-follow-button {
+    margin-top: 2%;
+    display: inline-block;
+    background-color: #1DA1F2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.custom-twitter-follow-button:hover {
+    background-color: #1A91DA;
+}
+
+
+
+/*MEDIA*/
+
+@media (max-width: 600px) {
+    .twitter-widget {
+        transform: scale(0.7);
+    }
 }
