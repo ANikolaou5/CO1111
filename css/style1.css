@@ -16,10 +16,19 @@ span p{
     text-align: center;
 }
 
+#challenges{
+    border-bottom: 2px solid black;
+}
+
 #challenges li{
+    font-size: 20px;
+    margin-left: -40px;
+    padding: 20px 0 20px 0;
     text-align: center;
-    margin-bottom: 3px;
-    border-radius: 5px;
     list-style-type: none;
-    border: 2px solid black;
+    border-top: 2px solid black;
+}
+
+#challenges a{
+    text-decoration: none;
 }
