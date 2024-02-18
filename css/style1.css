@@ -26,10 +26,6 @@ body{
     display: inline;
 }
 
-#challengesTitle{
-    text-align: center;
-}
-
 #challenges{
     border-bottom: 2px solid black;
 }
@@ -52,7 +48,7 @@ body{
 }
 
 .pirate{
-    margin-left: 100px;
+    margin-left: 200px;
 }
 
 #pirateImg{
