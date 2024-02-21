@@ -1,30 +1,85 @@
-body {
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
     font-family: Tahoma, sans-serif;
+}
+
+header {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+}
+
+body {
     background-color: #F5F5F5;
     color: #333;
     display: flex;
     justify-content: center;
-    padding: 20px;
-    text-align: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+
+nav {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav .buttons {
+    display: flex;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0 20px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #8B0000;
+}
+
+/* Style for the divider */
+.divider {
+    margin: 0 10px;
+    height: 20px;
+    width: 2px;
+    background-color: white;
 }
 
 .content-container {
-    border: 2px solid #8B0000;
-    padding: 20px;
-    margin: 20px auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 8%;
+    text-align: center;
+    justify-content: center;
+    /*border: 2px solid #8B0000;*/
+    /*border-radius: 10px;*/
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
     max-width: 800px;
     width: 100%;
-    text-align: center;
 }
 
 .content {
-    text-align: center; /* Ensures text and inline elements are centered */
+    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers flex items vertically in the container */
-    width: 100%; /* Take the full width to respect the container's centering */
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+    position: relative;
 }
 
 #subheading{
@@ -39,6 +94,7 @@ body {
 
 /*start button style*/
 #startButton{
+    margin-bottom: 20%;
     color: white;
     background: linear-gradient(45deg, #8B0000, #D52B1E);
     border: none;
@@ -103,7 +159,7 @@ body {
 .pirate{
     display: inline;
     flex-direction: column;
-    margin-right: 120px;
+    margin-right: 80px;
     padding: 20px;
 }
 
@@ -114,16 +170,28 @@ body {
 
 .pirateText{
     position: absolute;
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 17px;
     border: 3px solid red;
     padding: 5px;
     border-radius: 5px;
 }
 
+.pirateText::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 3px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: red transparent transparent transparent;
+    display: block;
+    width: 0;
+}
+
 .twitter-widget {
     margin: auto;
-    transform: scale(0.7);
+    transform: scale(0.9);
     transform-origin: center;
 }
 
@@ -144,12 +212,42 @@ body {
     background-color: #1A91DA;
 }
 
+.twitter-widget, .custom-twitter-follow-button {
+    margin-top: 20px;
+}
+
+/*FOOTER STYLING*/
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    /*flex-wrap: wrap;*/
+    /*justify-content: space-between;*/
+}
+
+.copyright {
+    text-align: center;
+    width: 100%;
+}
 
 
 /*MEDIA*/
 
-@media (max-width: 600px) {
-    .twitter-widget {
-        transform: scale(0.7);
+@media (max-width: 768px) {
+
+    .content-container {
+        padding: 20px;
+    }
+
+    .feature-section, .twitter-widget, .custom-twitter-follow-button {
+        margin-top: 15px;
+    }
+
+    #startButton {
+        padding: 8px 16px;
     }
 }
