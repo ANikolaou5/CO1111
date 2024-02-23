@@ -1,28 +1,24 @@
-// leaderboard.js
-
-function fetchLeaderboardData() {
-    return [
-        { rank: 1, name: "Player 1", score: 100 },
-        { rank: 2, name: "Player 2", score: 90 },
-        { rank: 3, name: "Player 3", score: 80 },
-    ];
+function handleLeaderboard(leaderboard) {
+    let html = "";
+    let leaderboardArray = leaderboard['leaderboard'];
+    for (const entry of leaderboardArray) {
+        html += "<tr>" +
+            "<td>" + entry['player'] + "</td>" +
+            "<td>" + entry['score'] + "</td>" +
+            "<td>" + entry['completionTime'] + "</td>" +
+            "</tr>";
+    }
+    let leaderboardElement = document.getElementById('leaderboardTable');
+    leaderboardElement.innerHTML += html;
 }
 
-function generateLeaderboardHTML(leaderboardData) {
-    var leaderboardHTML = "<table>";
-    leaderboardHTML += "<tr><th>Rank</th><th>Name</th><th>Score</th></tr>";
-    leaderboardData.forEach(function(player) {
-        leaderboardHTML += "<tr><td>" + player.rank + "</td><td>" + player.name + "</td><td>" + player.score + "</td></tr>";
-    });
-    leaderboardHTML += "</table>";
-    return leaderboardHTML;
+const TH_API_URL = "https://codecyprus.org/th/test-api/";
+function getLeaderBoard(url) {
+    fetch(url, {method: "GET"})
+        .then(response => response.json())
+        .then(json => handleLeaderboard(json));
 }
 
-function displayLeaderboard() {
-    var leaderboardContainer = document.getElementById("leaderboard-container");
-    var leaderboardData = fetchLeaderboardData();
-    var leaderboardHTML = generateLeaderboardHTML(leaderboardData);
-    leaderboardContainer.innerHTML = leaderboardHTML;
-}
-
-window.onload = displayLeaderboard;
+let session = "ag9nfmNvZGVjeXBydXNvcmdyFAsSB1Nlc3Npb24YgICA4OnngggM";
+let url = TH_API_URL + "leaderboard?sorted&session=" + session; // form url
+getLeaderBoard(url);
