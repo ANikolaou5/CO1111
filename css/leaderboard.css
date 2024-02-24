@@ -1,16 +1,60 @@
+body{
+    font-family: Papyrus, fantasy;
+}
+
 #leaderboardTitle{
-    text-align: center;
+    /*width: 50%;
+    margin: auto;*/
+    background-color: #fffdd0;
+    border: 15px solid darkred;
 }
 
 #leaderboardTable {
     margin: auto;
     width: 50%;
-    border: 1px solid blue;
+    border: 4px solid darkred;
+    background-color: #fffdd0;
+}
+#leaderboardTable th{
+    font-size: 24px;
+}
+
+#leaderboardTable td{
+    font-size: 20px;
 }
 
 #leaderboardTable th, #leaderboardTable td {
-    border-bottom: 1px solid gray;
+    border-bottom: 4px solid darkred;
     text-align: left;
+    font-weight: bold;
+    padding: 5px;
+}
+#leaderboardBackground{
+    position: fixed;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+.tab1{
+    tab-size: 4;
+    margin-left: 18px;
+}
+#leaderBoardDiv{
+    border-bottom: 3px solid darkred;
 }
 
+.star{
+    width: 7%;
+}
+
+#leaderboardSpan{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 

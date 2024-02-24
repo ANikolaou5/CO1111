@@ -1,12 +1,14 @@
 function handleLeaderboard(leaderboard) {
     let html = "";
     let leaderboardArray = leaderboard['leaderboard'];
+    let index= 1;
     for (const entry of leaderboardArray) {
         html += "<tr>" +
-            "<td>" + entry['player'] + "</td>" +
+            "<td>" + index + ".  " + entry['player'] + "</td>" +
             "<td>" + entry['score'] + "</td>" +
             "<td>" + entry['completionTime'] + "</td>" +
             "</tr>";
+        index++;
     }
     let leaderboardElement = document.getElementById('leaderboardTable');
     leaderboardElement.innerHTML += html;
