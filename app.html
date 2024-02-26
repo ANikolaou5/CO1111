@@ -41,6 +41,11 @@
                         listItem.style.cursor = "not-allowed";
                         listItem.style.opacity = "0.5";
                     }
+                    if(treasureHuntsArray[i].name=== "Sample treasure hunt"){
+                        listItem.addEventListener("click",function (){
+                            alert("Starting treasure hunt Sample")
+                        });
+                    }
                 }
             });
     }
