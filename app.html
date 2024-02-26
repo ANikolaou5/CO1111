@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<img src="photo_2024-02-21_15-55-38.jpg"  id="background-pic" alt="">
+<img src="photo_2024-02-21_15-55-38.jpg" id="background-pic" alt="">
 
 <div class="content-container">
     <div class="content">
@@ -21,14 +21,14 @@
 </div>
 
 <script>
-    function getChallenges(){
+    function getChallenges() {
         fetch("https://codecyprus.org/th/api/list")
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
                 console.log(jsonObject);
                 let challengesList = document.getElementById("challenges");
                 let treasureHuntsArray = jsonObject.treasureHunts;
-                for (let i = 0; i < treasureHuntsArray.length; i++){
+                for (let i = 0; i < treasureHuntsArray.length; i++) {
                     let listItem = document.createElement("li");
                     const uuid = treasureHuntsArray[i].uuid;
                     listItem.innerHTML = `<a href='start.html?player=Antri&app=TheTwoOfUsApp&treasure-hunt-id=${uuid}'>` + treasureHuntsArray[i].name + `</a>`;
@@ -36,16 +36,15 @@
 
                     // Disabling future or past treasure hunts based on the date starting/started.
                     let date = new Date();
-                    if(treasureHuntsArray[i].startsOn > date || treasureHuntsArray[i].endsOn < date){
+                    if (treasureHuntsArray[i].startsOn > date || treasureHuntsArray[i].endsOn < date) {
                         listItem.style.pointerEvents = "none";
                         listItem.style.cursor = "not-allowed";
                         listItem.style.opacity = "0.5";
                     }
-                    if(treasureHuntsArray[i].name=== "Sample treasure hunt"){
-                        listItem.addEventListener("click",function (){
-                            alert("Starting treasure hunt Sample")
-                        });
-                    }
+                    listItem.addEventListener("click", function () {
+                        alert("Starting " + treasureHuntsArray[i].name + "!")
+                    });
+
                 }
             });
     }
