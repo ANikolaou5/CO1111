@@ -6,7 +6,7 @@ body{
     /*width: 50%;
     margin: auto;*/
     background-color: #fffdd0;
-    border: 15px solid darkred;
+    border: 10px solid darkred;
 }
 
 #leaderboardTable {
@@ -16,7 +16,7 @@ body{
     background-color: #fffdd0;
 }
 #leaderboardTable th{
-    font-size: 20px;
+    font-size: 18px;
 }
 
 #leaderboardTable td{
