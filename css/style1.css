@@ -99,7 +99,35 @@ nav a:hover {
     color: #8B0000;
 }
 
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    position: relative;
+}
 
+.navbar a:hover, .navbar a.active {
+    color: #8B0000;
+}
+
+.navbar a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #8B0000;
+    transition: width 0.3s;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navbar a:hover::after, .navbar a.active::after {
+    width: 40%;
+}
 
 .content-container {
     position: relative;
@@ -329,6 +357,10 @@ hr {
     text-decoration: none;
     cursor: pointer;
 }
+
+
+
+
 
 
 /*MEDIA*/
