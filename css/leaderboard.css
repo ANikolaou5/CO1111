@@ -20,11 +20,11 @@ body{
 }
 
 #leaderboardTable td{
-    font-size: 14px;
+    font-size: 20px;
 }
 
 #leaderboardTable th, #leaderboardTable td {
-    border-bottom: 3px solid darkred;
+    border-bottom: 4px solid darkred;
     text-align: left;
     font-weight: bold;
     padding: 5px;
