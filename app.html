@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<img src="photo_2024-02-21_15-55-38.jpg"  id="background-pic" alt="">
 
 <div class="content-container">
     <div class="content">
@@ -32,6 +33,14 @@
                     const uuid = treasureHuntsArray[i].uuid;
                     listItem.innerHTML = `<a href='start.html?player=Antri&app=TheTwoOfUsApp&treasure-hunt-id=${uuid}'>` + treasureHuntsArray[i].name + `</a>`;
                     challengesList.appendChild(listItem);
+
+                    // Disabling future or past treasure hunts based on the date starting/started.
+                    let date = new Date();
+                    if(treasureHuntsArray[i].startsOn > date || treasureHuntsArray[i].endsOn < date){
+                        listItem.style.pointerEvents = "none";
+                        listItem.style.cursor = "not-allowed";
+                        listItem.style.opacity = "0.5";
+                    }
                 }
             });
     }
