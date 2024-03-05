@@ -3,10 +3,11 @@ function handleLeaderboard(leaderboard) {
     let leaderboardArray = leaderboard['leaderboard'];
     let index= 1;
     for (const entry of leaderboardArray) {
+        var time = Math.round(entry['completionTime'] / 60000);
         html += "<tr>" +
             "<td>" + index + ".  " + entry['player'] + "</td>" +
             "<td>" + entry['score'] + "</td>" +
-            "<td>" + entry['completionTime'] + "</td>" +
+            "<td>" + time + " minutes" + "</td>" +
             "</tr>";
         index++;
     }

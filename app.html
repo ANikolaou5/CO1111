@@ -30,6 +30,7 @@
                 console.log(jsonObject);
                 let challengesList = document.getElementById("challenges");
                 let treasureHuntsArray = jsonObject.treasureHunts;
+                var days, hours, minutes, seconds;
                 for (let i = 0; i < treasureHuntsArray.length; i++) {
                     let listItem = document.createElement("li");
                     const uuid = treasureHuntsArray[i].uuid;
@@ -38,7 +39,18 @@
 
                     // Disabling future or past treasure hunts based on the date starting/started.
                     let date = new Date();
-                    if (treasureHuntsArray[i].startsOn > date || treasureHuntsArray[i].endsOn < date) {
+                    if (treasureHuntsArray[i].startsOn > date) {
+                        var days = treasureHuntsArray[i].startsOn;
+                        var hours = treasureHuntsArray[i].startsOn;
+                        var minutes = treasureHuntsArray[i].startsOn;
+                        var seconds = treasureHuntsArray[i].startsOn;
+                        listItem.innerHTML += " starting in " + days + "d, " + hours + "h, " + minutes + "m, " + seconds + "s";
+                        listItem.style.pointerEvents = "none";
+                        listItem.style.cursor = "not-allowed";
+                        listItem.style.opacity = "0.5";
+                    }
+                    else if(treasureHuntsArray[i].endsOn < date){
+                        listItem.innerHTML += "(ended)";
                         listItem.style.pointerEvents = "none";
                         listItem.style.cursor = "not-allowed";
                         listItem.style.opacity = "0.5";
