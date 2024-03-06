@@ -12,7 +12,7 @@
 }
 
 #header {
-    background-color: #333;
+    background-color: #c7b198;
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -26,32 +26,19 @@
 .navbar {
     display: flex;
     align-items: center;
-}
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 18px;
-    transition: color 0.3s ease;
-}
-
-.navbar a:hover {
-    color: #8B0000;
 }
 
 .divider {
     height: 20px;
     width: 2px;
-    background-color: white;
+    background-color: #333;
     margin: 0 20px;
 }
 
 #white-box {
     padding: 3px 4px;
     border-radius: 3px;
-    /*border: 3px solid white;*/
-    /*box-shadow: white;*/
 }
 
 body {
@@ -76,7 +63,6 @@ body {
 }
 
 nav {
-    background-color: #333;
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -100,7 +86,7 @@ nav a:hover {
 }
 
 .navbar a {
-    color: white;
+    color: #333;
     text-decoration: none;
     margin-left: 20px;
     font-size: 18px;
@@ -160,6 +146,7 @@ nav a:hover {
 
 /*start button style*/
 #startButton{
+    margin-top: 8%;
     margin-bottom: 20%;
     color: white;
     background: linear-gradient(45deg, #8B0000, #D52B1E);
@@ -283,10 +270,12 @@ nav a:hover {
     margin-top: 20px;
 }
 
+
+
 /*FOOTER STYLING*/
 footer {
-    background-color: #333;
-    color: white;
+    background-color: #c7b198;
+    color: #333;
     padding: 20px 0;
     width: 100%;
     display: flex;
