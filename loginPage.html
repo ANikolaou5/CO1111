@@ -50,9 +50,22 @@
 
     }
 
-    let pirText = document.getElementsByClassName("pirateText");
-    let treasureHuntName = $.get("treasure-hunt-name");
-    pirText.innerHTML = "We are looking for the " + treasureHuntName + " treasure. Now tell us your team's name and we are ready to go!";
+    document.addEventListener('DOMContentLoaded', function() {
+        function getQueryParam(param) {
+            let searchParams = new URLSearchParams(window.location.search);
+            return searchParams.get(param);
+        }
+
+
+        let treasureHuntName = getQueryParam("treasure-hunt-name");
+
+        if(treasureHuntName) {
+            let pirTextElements = document.getElementsByClassName("pirateText");
+            if(pirTextElements.length > 0) {
+                pirTextElements[0].innerHTML = "We are looking for the " + treasureHuntName + " treasure. Now tell us your team's name and we are ready to go!";
+            }
+        }
+    });
 </script>
 </body>
 </html>
