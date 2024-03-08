@@ -25,45 +25,48 @@
 <script>
     function getChallenges() {
         fetch("https://codecyprus.org/th/api/list")
-            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(response => response.json())
             .then(jsonObject => {
                 console.log(jsonObject);
                 let challengesList = document.getElementById("challenges");
                 let treasureHuntsArray = jsonObject.treasureHunts;
+                let currentDate = new Date();
                 for (let i = 0; i < treasureHuntsArray.length; i++) {
                     let listItem = document.createElement("li");
                     const uuid = treasureHuntsArray[i].uuid;
                     listItem.innerHTML = `<a href='start.html?player=Antri&app=TheTwoOfUsApp&treasure-hunt-id=${uuid}'>` + treasureHuntsArray[i].name + `</a>`;
                     challengesList.appendChild(listItem);
 
-                    // Disabling future or past treasure hunts based on the date starting/started.
-                    let date = new Date();
-                    if (treasureHuntsArray[i].startsOn > date) {
-                        var days = treasureHuntsArray[i].startsOn / 86400000;
-                        var hours = treasureHuntsArray[i].startsOn % 86400000 / 3600000;
-                        var minutes = treasureHuntsArray[i].startsOn % 86400000 % 3600000 / 60000;
-                        var seconds = treasureHuntsArray[i].startsOn  % 86400000 % 3600000 % 60000 / 1000;
+                    let startsOnDate = new Date(treasureHuntsArray[i].startsOn);
+                    let endsOnDate = new Date(treasureHuntsArray[i].endsOn);
+
+                    if (startsOnDate > currentDate) {
+                        let diff = startsOnDate - currentDate;
+                        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                        let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
                         listItem.innerHTML += " starting in " + days + "d, " + hours + "h, " + minutes + "m, " + seconds + "s";
                         listItem.style.pointerEvents = "none";
                         listItem.style.cursor = "not-allowed";
                         listItem.style.opacity = "0.5";
-                    }
-                    else if(treasureHuntsArray[i].endsOn < date){
-                        listItem.innerHTML += "(ended)";
+                    } else if (endsOnDate < currentDate) {
+                        listItem.innerHTML += " (ended)";
                         listItem.style.pointerEvents = "none";
                         listItem.style.cursor = "not-allowed";
                         listItem.style.opacity = "0.5";
                     }
                     listItem.addEventListener("click", function () {
-                            alert("Starting treasure hunt: " + treasureHuntsArray[i].name);
-                            window.location.href="loginPage.html";
+                        alert("Starting treasure hunt: " + treasureHuntsArray[i].name);
+                        window.location.href = "loginPage.html";
                     });
-
                 }
             });
     }
 
     getChallenges();
+
 </script>
 </body>
 </html>
