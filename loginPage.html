@@ -51,8 +51,14 @@
     }
 
     let pirText = document.getElementsByClassName("pirateText");
-    let treasureHuntName = $.get("treasure-hunt-name");
-    pirText.innerHTML = "We are looking for the " + treasureHuntName + " treasure. Now tell us your team's name and we are ready to go!";
+
+    console.log(location.href);
+    console.log(location.search);
+    const params = new URLSearchParams(location.search);
+    let treasureHuntName = params.has("treasure-hunt-name");
+    if (treasureHuntName) {
+        pirText.innerHTML = "We are looking for the " + params.get("treasure-hunt-name") + " treasure. Now tell us your team's name and we are ready to go!";
+    }
 </script>
 </body>
 </html>
