@@ -12,16 +12,17 @@
     <div class="content">
         <span class="pirate">
                 <img id="pirateImg" src="pirate.png" alt="Pirate">
-                <span class="pirateText">We are looking for the 'Sample treasure hunt' treasure. Now tell us your team's name and emails and we are ready to go!</span>
+                <span class="pirateText"></span>
         </span>
 
     </div>
 </div>
 <div>
     <form name="startForm" id="startForm" onsubmit="getChallenges(event)" >
-        <h4>Team</h4>
-        <p><input type="text" name="playerName" minlength="3" maxlength="15" placeholder="Your name..." required /></p>
-        <p><input type="email" name="email" minlength="10" maxlength="50" placeholder="Email..." required /></p>
+        <h4>Enter your team's name:</h4>
+        <br>
+        <p><input type="text" name="playerName" minlength="3" maxlength="15" placeholder="Team name..." required /></p>
+        <br>
         <p><input id="submit" type="submit" value="Start! " /></p>
     </form>
 </div>
@@ -48,6 +49,10 @@
             })
 
     }
+
+    let pirText = document.getElementsByClassName("pirateText");
+    let treasureHuntName = $.get("treasure-hunt-name");
+    pirText.innerHTML = "We are looking for the " + treasureHuntName + " treasure. Now tell us your team's name and we are ready to go!";
 </script>
 </body>
 </html>
