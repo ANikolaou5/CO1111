@@ -34,7 +34,8 @@
                 for (let i = 0; i < treasureHuntsArray.length; i++) {
                     let listItem = document.createElement("li");
                     const uuid = treasureHuntsArray[i].uuid;
-                    listItem.innerHTML = `<a href='start.html?player=Antri&app=TheTwoOfUsApp&treasure-hunt-id=${uuid}'>` + treasureHuntsArray[i].name + `</a>`;
+                    const url = `loginPage.html?treasure-hunt-id=${uuid}`;
+                    listItem.innerHTML = `<p onclick="location.href=${url}">` + treasureHuntsArray[i].name + `</a>`;
                     challengesList.appendChild(listItem);
 
                     let startsOnDate = new Date(treasureHuntsArray[i].startsOn);
@@ -59,7 +60,7 @@
                     }
                     listItem.addEventListener("click", function () {
                         alert("Starting treasure hunt: " + treasureHuntsArray[i].name);
-                        window.location.href = `loginPage.html?treasure-hunt-name=${treasureHuntsArray[i].name}`;
+                        window.location.href = `loginPage.html?treasure-hunt-name=${treasureHuntsArray[i].name}&treasure-hunt-id=${treasureHuntsArray[i].uuid}`;
                     });
                 }
             });

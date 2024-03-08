@@ -12,7 +12,7 @@
     <div class="content">
         <span class="pirate">
                 <img id="pirateImg" src="pirate.png" alt="Pirate">
-                <span class="pirateText"></span>
+                <span class="pirateText" id="pirateText"></span>
         </span>
 
     </div>
@@ -50,14 +50,14 @@
 
     }
 
-    let pirText = document.getElementsByClassName("pirateText");
+    let pirText = document.getElementById("pirateText");
 
     console.log(location.href);
     console.log(location.search);
     const params = new URLSearchParams(location.search);
     let treasureHuntName = params.has("treasure-hunt-name");
     if (treasureHuntName) {
-        pirText.innerHTML = "We are looking for the " + params.get("treasure-hunt-name") + " treasure. Now tell us your team's name and we are ready to go!";
+        pirText.innerHTML = "We are looking for the " + treasureHuntName + " treasure. Now tell us your team's name and we are ready to go!";
     }
 </script>
 </body>
