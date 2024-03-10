@@ -35,7 +35,7 @@
                     let listItem = document.createElement("li");
                     const uuid = treasureHuntsArray[i].uuid;
                     const url = `loginPage.html?treasure-hunt-id=${uuid}`;
-                    listItem.innerHTML = `<p onclick="location.href=${url}">` + treasureHuntsArray[i].name + `</a>`;
+                    listItem.innerHTML = `<a onclick="location.href=${url}">` + treasureHuntsArray[i].name + `</a>`;
                     challengesList.appendChild(listItem);
 
                     let startsOnDate = new Date(treasureHuntsArray[i].startsOn);

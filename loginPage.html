@@ -39,10 +39,11 @@
             .then(response => response.json())
             .then(jsonObject => {
                 console.log(jsonObject);
+                let treasureHuntsArray = jsonObject.treasureHunts;
                 //let sessionId = jsonObject.sessionId;
                 if (jsonObject.status === "OK") {
-                    // if the status is ok go to this page ->...
-                    window.location.href = "...";
+                    const url = `start.html?treasure-hunt-id=${uuid}`;
+                    listItem.innerHTML = `<a onclick="location.href=${url}">` + treasureHuntsArray[i].name + `</a>`;
                 } else {
                     alert( "The specified Name: "+ playerName+", is already in use (try a different one)."); // Logging.PlayerName error message
                 }
