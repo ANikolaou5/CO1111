@@ -6,10 +6,15 @@
     <title>Start Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
+<section id="header" class="arrow-icon">
+    <a id="goBack_button"><i class='fas fa-arrow-circle-left'></i></a>
+    <img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo">
 
+</section>
 <img src="wallpaper1.jpeg" id="background-pic" alt="">
 
 <div class="content-container">
@@ -34,7 +39,7 @@
                 for (let i = 0; i < treasureHuntsArray.length; i++) {
                     let listItem = document.createElement("li");
                     const uuid = treasureHuntsArray[i].uuid;
-                    const url = `loginPage.html?treasure-hunt-id=${uuid}`;
+                    const url = `loginPage.html?treasure-hunt-name=${treasureHuntsArray[i].name}&treasure-hunt-id=${treasureHuntsArray[i].uuid}`;
                     listItem.innerHTML = `<a onclick="location.href=${url}">` + treasureHuntsArray[i].name + `</a>`;
                     challengesList.appendChild(listItem);
 
@@ -66,22 +71,11 @@
             });
     }
 
-    function getQuestions(){
-        fetch("https://codecyprus.org/th/th/api/question")
-            .then(response => response.json()) //Parse JSON text to JavaScript object
-            .then(jsonObject => {
-                console.log(jsonObject);
-                let questionsList = document.getElementById("question");
-                let questionsArray = jsonObject.questions;
-                for (let i = 0; i < questionsArray.length; i++) {
-                    const q = questionsArray[i];
-                    console.log(q);
-                }
-            });
-    }
-
     getChallenges();
-
+    let goBack_button=document.getElementById("goBack_button");
+    goBack_button.addEventListener("click", function() {
+        window.history.back();  // Navigate to the previous page in the browser's history
+    });
 </script>
 </body>
 </html>

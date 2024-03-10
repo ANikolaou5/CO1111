@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/loginPage.css">
+    <link rel="stylesheet" href="css/style1.css">
     <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+<section id="header" class="arrow-icon">
+    <a id="goBack_button"><i class='fas fa-arrow-circle-left'></i></a>
+    <img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo">
+
+</section>
 <img src="wallpaper1.jpeg" id="background-pic" alt="">
 <div class="content-container">
     <div class="content">
@@ -21,32 +28,31 @@
     <form name="startForm" id="startForm" onsubmit="getChallenges(event)" >
         <h4>Enter your team's name:</h4>
         <br>
-        <p><input type="text" name="playerName" minlength="3" maxlength="15" placeholder="Team name..." required /></p>
+        <p><input id="name_input" type="text" name="playerName" minlength="3" maxlength="15" placeholder="Team name..." required /></p>
         <br>
         <p><input id="submit" type="submit" value="Start! " /></p>
     </form>
 </div>
 
 <script>
-    function getChallenges(event) {
-        event.preventDefault();
+    function getChallenges() {
 
-        let playerName = document.forms["startForm"]["playerName"].value;
-        let appId = "simpsons-app";
-        let treasureHuntId = "ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw";
-
-        fetch(`https://codecyprus.org/th/api/start?player=${playerName}&app=${appId}&treasure-hunt-id=${treasureHuntId}`)
+        fetch(`https://codecyprus.org/th/api/start?`)
             .then(response => response.json())
             .then(jsonObject => {
-                console.log(jsonObject);
-                let treasureHuntsArray = jsonObject.treasureHunts;
-                //let sessionId = jsonObject.sessionId;
+                let player_name=document.getElementById("name_input").value();
+                let treasure_name=params.get("treasure-hunt-name");
+                let uuid=params.get("treasure-hunt-id");
+                let submit_button=document.getElementById("submit");
                 if (jsonObject.status === "OK") {
-                    const url = `start.html?treasure-hunt-id=${uuid}`;
-                    listItem.innerHTML = `<a onclick="location.href=${url}">` + treasureHuntsArray[i].name + `</a>`;
+                    const url = `start.html?player=${player_name}treasure-hunt-name=${treasure_name}&treasure-hunt-id=${uuid}`;
+                    submit_button.innerHTML = `<a onclick="location.href=${url}">` + treasure_name + `</a>`;
                 } else {
-                    alert( "The specified Name: "+ playerName+", is already in use (try a different one)."); // Logging.PlayerName error message
+                    alert( "The specified Name: "+ player_name+", is already in use (try a different one)."); // Logging.PlayerName error message
                 }
+                submit_button.addEventListener("click", function () {
+                    window.location.href = `start.html?player=${player_name}treasure-hunt-name=${treasure_name}&treasure-hunt-id=${uuid}`;
+                });
             })
 
     }
@@ -58,8 +64,14 @@
     const params = new URLSearchParams(location.search);
     let treasureHuntName = params.has("treasure-hunt-name");
     if (treasureHuntName) {
-        pirText.innerHTML = "We are looking for the " + treasureHuntName + " treasure. Now tell us your team's name and we are ready to go!";
+        pirText.innerHTML = "We are looking for the " + params.get("treasure-hunt-name") + ". Now tell us your team's name and we are ready to go!";
     }
+
+    getChallenges();
+    let goBack_button=document.getElementById("goBack_button");
+    goBack_button.addEventListener("click", function() {
+        window.history.back();  // Navigate to the previous page in the browser's history
+    });
 </script>
 </body>
 </html>
