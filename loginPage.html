@@ -43,7 +43,6 @@
             .then(jsonObject => {
                 const params = new URLSearchParams(location.search);
                 let player=document.getElementById("name_input").value;
-                let treasure_name=params.get("treasure-hunt-name");
                 let uuid=params.get("treasure-hunt-id");
                 let submit_button=document.getElementById("submit");
                 if (jsonObject.status === "OK") {
