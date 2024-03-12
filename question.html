@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Question</title>
     <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="css/questionsStyle.css">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -12,23 +13,29 @@
         <a id="goBack_button"><i class='fas fa-arrow-circle-left'></i></a>
         <img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo">
     </section>
+    <img src="wallpaper1.jpeg" id="background-pic" alt="">
 
+    <br><br><br>
     <div id="question"></div>
 
     <script>
         function getQuestion(){
             const params = new URLSearchParams(location.search);
 
-            let sessionId=params.get("session");
+            let sessionId = params.get("session");
 
             fetch(`https://codecyprus.org/th/api/question?session=${sessionId}`)
                 .then(response => response.json()) //Parse JSON text to JavaScript object
                 .then(jsonObject => {
                     console.log(jsonObject);
+                    let questionDiv = document.getElementById("question");
                     if (jsonObject.status === "OK") {
-                        let questionDiv = document.getElementById("question");
                         let question = jsonObject.questionText;
                         questionDiv.innerHTML += question;
+                    }
+                    if(jsonObject.questionType === "INTEGER"){
+                        questionDiv.innerHTML += "<br><br><p><input id='int_input' type='number' step='1' name='int_input' minlength='1' maxlength='15' placeholder='ex. 1' required /></p><br>"
+                        questionDiv.innerHTML += "<p><input id='submit_answer' type='submit' value='Next question'/></p>"
                     }
                 });
         }

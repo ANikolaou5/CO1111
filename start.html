@@ -24,7 +24,6 @@
                 .then(response => response.json()) //Parse JSON text to JavaScript object
                 .then(jsonObject => {
                     console.log(jsonObject);
-                    //let numOfQuestions = jsonObject.numOfQuestions;
                     if (jsonObject.status === "OK") {
                         let sessionId = jsonObject.session;
                         window.location.href = `question.html?session=${sessionId}`;
