@@ -50,22 +50,6 @@
 
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        function getQueryParam(param) {
-            let searchParams = new URLSearchParams(window.location.search);
-            return searchParams.get(param);
-        }
-
-
-        let treasureHuntName = getQueryParam("treasure-hunt-name");
-
-        if(treasureHuntName) {
-            let pirTextElements = document.getElementsByClassName("pirateText");
-            if(pirTextElements.length > 0) {
-                pirTextElements[0].innerHTML = "We are looking for the " + treasureHuntName + " treasure. Now tell us your team's name and we are ready to go!";
-            }
-        }
-    });
     let pirText = document.getElementsByClassName("pirateText");
 
     console.log(location.href);
@@ -75,7 +59,6 @@
     if (treasureHuntName) {
         pirText.innerHTML = "We are looking for the " + params.get("treasure-hunt-name") + " treasure. Now tell us your team's name and we are ready to go!";
     }
-
 </script>
 </body>
 </html>
