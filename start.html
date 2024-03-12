@@ -27,8 +27,8 @@
                 .then(response => response.json()) //Parse JSON text to JavaScript object
                 .then(jsonObject => {
                     console.log(jsonObject);
-                    let session = jasonObject.session;
-                    let numOfQuestions = jasonObject.numOfQuestions;
+                    let session = jsonObject.session;
+                    let numOfQuestions = jsonObject.numOfQuestions;
                 });
         }
 

@@ -35,7 +35,8 @@
 </div>
 
 <script>
-    function getChallenges() {
+    function getChallenges(event) {
+        event.preventDefault();
 
         fetch(`https://codecyprus.org/th/api/list`)
             .then(response => response.json())
@@ -51,9 +52,6 @@
                 } else {
                     alert( "The specified Name: "+ player+", is already in use (try a different one)."); // Logging.PlayerName error message
                 }
-                submit_button.addEventListener("click", function () {
-                    window.location.href = `start.html?player=${player}&app=treasure-hunt-app&treasure-hunt-id=${uuid}`;
-                });
             })
 
     }
