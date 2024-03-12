@@ -47,8 +47,9 @@
                 let uuid=params.get("treasure-hunt-id");
                 let submit_button=document.getElementById("submit");
                 if (jsonObject.status === "OK") {
-                    const url = `start.html?player=${player}&app=treasure-hunt-app&treasure-hunt-id=${uuid}`;
-                    submit_button.innerHTML = `<a onclick="location.href='${url}'">${treasure_name}</a>`;
+                    submit_button.addEventListener("click", function () {
+                        window.location.href = `start.html?player=${player}&app=treasure-hunt-app&treasure-hunt-id=${uuid}`;
+                    });
                 } else {
                     alert( "The specified Name: "+ player+", is already in use (try a different one)."); // Logging.PlayerName error message
                 }
