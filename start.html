@@ -27,13 +27,12 @@
                     //let numOfQuestions = jsonObject.numOfQuestions;
                     if (jsonObject.status === "OK") {
                         let sessionId = jsonObject.session;
+                        window.location.href = `question.html?session=${sessionId}`;
                     }
-                    return sessionId;
                 });
         }
 
-        let sessionId = getSessionId();
-        console.log(sessionId);
+        getSessionId();
         let goBack_button=document.getElementById("goBack_button");
         goBack_button.addEventListener("click", function() {
             window.history.back();  // Navigate to the previous page in the browser's history
