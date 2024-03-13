@@ -21,7 +21,7 @@
         <input id="answer-input" type="text" placeholder="Your answer..." required />
         <span id="buttons">
             <button type="submit">Submit Answer</button>
-            <button type="submit" id="skipButton">Skip Question</button>
+            <button type="button" id="skipButton">Skip Question</button>
         </span>
     </form>
 </div>
@@ -41,8 +41,10 @@
                 if (jsonObject.status === "OK") {
                     questionText.innerHTML = jsonObject.questionText;
                     updateInputField(jsonObject.questionType);
-                    if (jsonObject.canBeSkipped){
+                    if (jsonObject.canBeSkipped) {
                         skip.style.display = "block";
+                    } else {
+                        skip.style.display = "none";
                     }
                 } else {
                     alert("Error: " + jsonObject.errorMessages.join("; "));
@@ -79,8 +81,24 @@
         }
     });
 
-    skip.addEventListener("submit", function(event) {
-        getQuestion();
+    skip.addEventListener("click", function(event) {
+        console.log("Skip button clicked!");
+        fetch(`https://codecyprus.org/th/api/skip?session=${encodeURIComponent(sessionId)}`)
+            .then(response => response.json())
+            .then(jsonObject => {
+                if(jsonObject.status === "OK") {
+                    alert("Question Skipped");
+                    if(jsonObject.completed) {
+                        alert("Congratulations, you have completed the treasure hunt!");
+                        window.location.href = `leaderboard.html?session=${encodeURIComponent(sessionId)}`;
+
+                    } else {
+                        getQuestion();
+                    }
+                } else {
+                    alert("Error: " + (jsonObject.errorMessage || "An error occurred."));
+                }
+            })
     });
 
     function submitAnswer(answer) {
