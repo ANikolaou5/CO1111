@@ -9,42 +9,100 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <section id="header" class="arrow-icon">
-        <a id="goBack_button"><i class='fas fa-arrow-circle-left'></i></a>
-        <img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo">
-    </section>
-    <img src="wallpaper1.jpeg" id="background-pic" alt="">
+<section id="header" class="arrow-icon">
+    <a id="goBack_button"><i class='fas fa-arrow-circle-left'></i></a>
+    <img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo">
+</section>
+<img src="wallpaper1.jpeg" id="background-pic" alt="">
 
-    <br><br><br>
-    <div id="question"></div>
+<div id="question-container">
+    <div id="question-text"></div>
+    <form id="answer-form">
+        <input id="answer-input" type="text" placeholder="Your answer..." required />
+        <button type="submit">Submit Answer</button>
+    </form>
+</div>
 
-    <script>
-        function getQuestion(){
-            const params = new URLSearchParams(location.search);
+<script>
+    const questionContainer = document.getElementById("question-container");
+    const questionText = document.getElementById("question-text");
+    const answerForm = document.getElementById("answer-form");
+    const answerInput = document.getElementById("answer-input");
+    let sessionId = new URLSearchParams(location.search).get("session");
 
-            let sessionId = params.get("session");
-
-            fetch(`https://codecyprus.org/th/api/question?session=${sessionId}`)
-                .then(response => response.json()) //Parse JSON text to JavaScript object
-                .then(jsonObject => {
-                    console.log(jsonObject);
-                    let questionDiv = document.getElementById("question");
-                    if (jsonObject.status === "OK") {
-                        let question = jsonObject.questionText;
-                        questionDiv.innerHTML += question;
-                    }
-                    if(jsonObject.questionType === "INTEGER"){
-                        questionDiv.innerHTML += "<br><br><p><input id='int_input' type='number' step='1' name='int_input' minlength='1' maxlength='15' placeholder='ex. 1' required /></p><br>"
-                        questionDiv.innerHTML += "<p><input id='submit_answer' type='submit' value='Next question'/></p>"
-                    }
-                });
-        }
-
-        getQuestion();
-        let goBack_button=document.getElementById("goBack_button");
-        goBack_button.addEventListener("click", function() {
-            window.history.back();  // Navigate to the previous page in the browser's history
+    function getQuestion(){
+        fetch(`https://codecyprus.org/th/api/question?session=${encodeURIComponent(sessionId)}`)
+            .then(response => response.json())
+            .then(jsonObject => {
+                if (jsonObject.status === "OK") {
+                    questionText.innerHTML = jsonObject.questionText;
+                    updateInputField(jsonObject.questionType);
+                } else {
+                    alert("Error: " + jsonObject.errorMessages.join("; "));
+                }
+            }).catch(error => {
+            alert("An error occurred while fetching the question: " + error);
         });
-    </script>
+    }
+
+    function updateInputField(questionType) {
+        answerInput.type = questionType === "INTEGER" ? "number" : "text";
+        answerInput.placeholder = getPlaceholderText(questionType);
+        answerInput.value = "";
+    }
+
+    function getPlaceholderText(questionType) {
+        switch(questionType) {
+            case "INTEGER": return "Enter an integer...";
+            case "NUMERIC": return "Enter a number...";
+            case "BOOLEAN": return "Enter 'true' or 'false'...";
+            case "MCQ": return "Enter 'A', 'B', 'C', or 'D'...";
+            case "TEXT": return "Enter your answer...";
+            default: return "Your answer...";
+        }
+    }
+
+    answerForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const answer = answerInput.value.trim();
+        if (answer) {
+            submitAnswer(answer);
+        } else {
+            alert("Please enter an answer.");
+        }
+    });
+
+    function submitAnswer(answer) {
+        fetch(`https://codecyprus.org/th/api/answer?session=${encodeURIComponent(sessionId)}&answer=${encodeURIComponent(answer)}`)
+            .then(response => response.json())
+            .then(jsonObject => {
+                console.log(jsonObject); // this one is for debugging
+                if(jsonObject.status === "OK") {
+                    alert(jsonObject.correct ? "Correct Answer!" : "Wrong Answer!");
+                    if(jsonObject.completed) {
+                        alert("Congratulations, you have completed the treasure hunt!");
+                    } else {
+                        getQuestion();
+                    }
+                } else {
+                    alert("Error: " + (jsonObject.errorMessage || "An error occurred."));
+                }
+            }).catch(error => {
+            console.error("An error occurred while submitting the answer:", error);
+            alert("An error occurred while submitting the answer.");
+        });
+    }
+
+    if(sessionId) {
+        getQuestion();
+    } else {
+        alert("No session ID provided.");
+    }
+
+    let goBack_button = document.getElementById("goBack_button");
+    goBack_button.addEventListener("click", function() {
+        window.history.back();
+    });
+</script>
 </body>
 </html>
