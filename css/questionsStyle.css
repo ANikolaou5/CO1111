@@ -43,3 +43,15 @@
 #answer-form button:hover {
     background-color: #8B0000;
 }
+
+#skipButton{
+    display: none;
+}
+
+#buttons{
+    display: flex;
+}
+
+#buttons button{
+    margin-left: 5px;
+}

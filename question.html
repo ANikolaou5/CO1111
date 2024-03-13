@@ -19,7 +19,10 @@
     <div id="question-text"></div>
     <form id="answer-form">
         <input id="answer-input" type="text" placeholder="Your answer..." required />
-        <button type="submit">Submit Answer</button>
+        <span id="buttons">
+            <button type="submit">Submit Answer</button>
+            <button type="submit" id="skipButton">Skip Question</button>
+        </span>
     </form>
 </div>
 
@@ -28,6 +31,7 @@
     const questionText = document.getElementById("question-text");
     const answerForm = document.getElementById("answer-form");
     const answerInput = document.getElementById("answer-input");
+    let skip = document.getElementById("skipButton");
     let sessionId = new URLSearchParams(location.search).get("session");
 
     function getQuestion(){
@@ -37,6 +41,9 @@
                 if (jsonObject.status === "OK") {
                     questionText.innerHTML = jsonObject.questionText;
                     updateInputField(jsonObject.questionType);
+                    if (jsonObject.canBeSkipped){
+                        skip.style.display = "block";
+                    }
                 } else {
                     alert("Error: " + jsonObject.errorMessages.join("; "));
                 }
@@ -70,6 +77,10 @@
         } else {
             alert("Please enter an answer.");
         }
+    });
+
+    skip.addEventListener("submit", function(event) {
+        getQuestion();
     });
 
     function submitAnswer(answer) {
