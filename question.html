@@ -71,18 +71,7 @@
         }
     }
 
-    answerForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-        const answer = answerInput.value.trim();
-        if (answer) {
-            submitAnswer(answer);
-        } else {
-            alert("Please enter an answer.");
-        }
-    });
-
-    skip.addEventListener("click", function(event) {
-        console.log("Skip button clicked!");
+    function skipQuestion(){
         fetch(`https://codecyprus.org/th/api/skip?session=${encodeURIComponent(sessionId)}`)
             .then(response => response.json())
             .then(jsonObject => {
@@ -99,7 +88,7 @@
                     alert("Error: " + (jsonObject.errorMessage || "An error occurred."));
                 }
             })
-    });
+    }
 
     function submitAnswer(answer) {
         fetch(`https://codecyprus.org/th/api/answer?session=${encodeURIComponent(sessionId)}&answer=${encodeURIComponent(answer)}`)
@@ -121,6 +110,21 @@
             alert("An error occurred while submitting the answer.");
         });
     }
+
+    answerForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const answer = answerInput.value.trim();
+        if (answer) {
+            submitAnswer(answer);
+        } else {
+            alert("Please enter an answer.");
+        }
+    });
+
+    skip.addEventListener("click", function(event) {
+        console.log("Skip button clicked!");
+        skipQuestion();
+    });
 
     if(sessionId) {
         getQuestion();
