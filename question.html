@@ -103,7 +103,11 @@
                         getQuestion();
                     }
                 } else {
-                    alert("Error: " + (jsonObject.errorMessage || "An error occurred."));
+                    let fullError="";
+                    for(let i=0;i<jsonObject.errorMessages.lenght;i++){
+                        fullError+=jsonObject.errorMessages[i]+"\n";
+                    }
+                    alert(fullError);
                 }
             }).catch(error => {
             console.error("An error occurred while submitting the answer:", error);
