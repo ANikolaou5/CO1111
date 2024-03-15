@@ -12,6 +12,7 @@
 <section id="header" class="arrow-icon">
     <a id="goBack_button"><i class='fas fa-arrow-circle-left'></i></a>
     <a href="index.html"><img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo"></a>
+    <div id="score"></div>
 </section>
 <img src="wallpaper1.jpeg" id="background-pic" alt="">
 
@@ -32,12 +33,15 @@
     const answerForm = document.getElementById("answer-form");
     const answerInput = document.getElementById("answer-input");
     let skip = document.getElementById("skipButton");
+    let scoreDiv = document.getElementById("score");
     let sessionId = new URLSearchParams(location.search).get("session");
 
     function getQuestion(){
+        getScore();
         fetch(`https://codecyprus.org/th/api/question?session=${encodeURIComponent(sessionId)}`)
             .then(response => response.json())
             .then(jsonObject => {
+                console.log(jsonObject);
                 if (jsonObject.status === "OK") {
                     questionText.innerHTML = jsonObject.questionText;
                     updateInputField(jsonObject.questionType);
@@ -99,12 +103,13 @@
                     alert(jsonObject.message);
                     if(jsonObject.completed) {
                         alert("Congratulations, you have completed the treasure hunt!");
+                        window.location.href = `leaderboard.html?session=${encodeURIComponent(sessionId)}`;
                     } else {
                         getQuestion();
                     }
                 } else {
                     let fullError="";
-                    for(let i=0;i<jsonObject.errorMessages.lenght;i++){
+                    for(let i=0;i<jsonObject.errorMessages.length;i++){
                         fullError+=jsonObject.errorMessages[i]+"\n";
                     }
                     alert(fullError);
@@ -113,6 +118,24 @@
             console.error("An error occurred while submitting the answer:", error);
             alert("An error occurred while submitting the answer.");
         });
+    }
+
+    function getScore(){
+        fetch(`https://codecyprus.org/th/api/score?session=${encodeURIComponent(sessionId)}`)
+            .then(response => response.json())
+            .then(jsonObject => {
+                console.log(jsonObject);
+                if(jsonObject.status === "OK") {
+                    let scoreNum = jsonObject.score;
+                    scoreDiv.innerHTML = "Score: " + scoreNum;
+                } else {
+                    let fullError="";
+                    for(let i=0;i<jsonObject.errorMessages.length;i++){
+                        fullError+=jsonObject.errorMessages[i]+"\n";
+                    }
+                    alert(fullError);
+                }
+            });
     }
 
     answerForm.addEventListener("submit", function(event) {
