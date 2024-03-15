@@ -47,13 +47,32 @@
                 let submit_button=document.getElementById("submit");
                 if (jsonObject.status === "OK") {
                     submit_button.addEventListener("click", function () {
-                        window.location.href = `start.html?player=${player}&app=treasure-hunt-app&treasure-hunt-id=${uuid}`;
+                        getSessionId(player, uuid);
                     });
                 } else {
                     alert( "The specified Name: "+ player+", is already in use (try a different one)."); // Logging.PlayerName error message
                 }
             })
 
+    }
+
+    function getSessionId(player, uuid){
+        fetch(`https://codecyprus.org/th/api/start?player=${player}&app=treasure-hunt-app&treasure-hunt-id=${uuid}`)
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+                console.log(jsonObject);
+                if (jsonObject.status === "OK") {
+                    let sessionId = jsonObject.session;
+                    window.location.href = `question.html?session=${sessionId}`;
+                }
+                else {
+                    let fullError="";
+                    for(let i=0;i<jsonObject.errorMessages.length;i++){
+                        fullError+=jsonObject.errorMessages[i]+"\n";
+                    }
+                    alert(fullError);
+                }
+            });
     }
 
     let pirText = document.getElementById("pirateText");
