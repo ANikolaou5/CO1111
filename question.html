@@ -76,12 +76,12 @@
             .then(response => response.json())
             .then(jsonObject => {
                 if(jsonObject.status === "OK") {
-                    alert("Question Skipped");
+                    let answer = confirm("Are you sure you want to skip this question?");
                     if(jsonObject.completed) {
                         alert("Congratulations, you have completed the treasure hunt!");
                         window.location.href = `leaderboard.html?session=${encodeURIComponent(sessionId)}`;
 
-                    } else {
+                    } else if (answer) {
                         getQuestion();
                     }
                 } else {
@@ -96,7 +96,7 @@
             .then(jsonObject => {
                 console.log(jsonObject); // this one is for debugging
                 if(jsonObject.status === "OK") {
-                    alert(jsonObject.correct ? "Correct Answer!" : "Wrong Answer!");
+                    alert(jsonObject.message);
                     if(jsonObject.completed) {
                         alert("Congratulations, you have completed the treasure hunt!");
                     } else {
