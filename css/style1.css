@@ -24,6 +24,7 @@
 }
 
 .arrow-icon a i{
+    cursor: pointer;
     line-height:30px;
     font-size:20px;
     -webkit-transition: all 200ms ease-in;
@@ -201,6 +202,7 @@ nav a:hover {
 }
 
 #challenges li {
+    cursor: pointer;
     font-size: 20px;
     margin: 3% auto;
     padding: 15px;
@@ -253,6 +255,7 @@ nav a:hover {
     border-radius: 5px;
 }
 
+/*for the pirate message thingy*/
 .pirateText::after {
     content: "";
     position: absolute;
@@ -412,6 +415,21 @@ hr {
     text-decoration: none;
     cursor: pointer;
 }
+
+/*#loading-screen {*/
+
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*}*/
+
+/*#loading-screen img {*/
+/*    width: 70%;*/
+/*    height: 70%;*/
+/*}*/
 
 /*MEDIA*/
 
