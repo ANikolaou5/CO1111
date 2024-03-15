@@ -28,6 +28,33 @@
         <br>
     </div>
 
-<script src="js/leaderboard.js"></script>
+<script>
+    let sessionId = new URLSearchParams(location.search).get("session");
+
+    function handleLeaderboard(leaderboard) {
+        let html = "";
+        let leaderboardArray = leaderboard['leaderboard'];
+        let index= 1;
+        for (const entry of leaderboardArray) {
+            var time = Math.round(entry['completionTime'] / 60000);
+            html += "<tr>" +
+                "<td>" + index + ".  " + entry['player'] + "</td>" +
+                "<td>" + entry['score'] + "</td>" +
+                "<td>" + time + " minutes" + "</td>" +
+                "</tr>";
+            index++;
+        }
+        let leaderboardElement = document.getElementById('leaderboardTable');
+        leaderboardElement.innerHTML += html;
+    }
+
+    function getLeaderBoard() {
+        fetch(`https://codecyprus.org/th/api/leaderboard?session=${sessionId}`)
+            .then(response => response.json())
+            .then(json => handleLeaderboard(json));
+    }
+
+    getLeaderBoard();
+</script>
 </body>
 </html>

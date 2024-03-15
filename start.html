@@ -28,7 +28,7 @@
                         let sessionId = jsonObject.session;
                         window.location.href = `question.html?session=${sessionId}`;
                     }
-                    else{
+                    else {
                         let fullError="";
                         for(let i=0;i<jsonObject.errorMessages.lenght;i++){
                             fullError+=jsonObject.errorMessages[i]+"\n";
