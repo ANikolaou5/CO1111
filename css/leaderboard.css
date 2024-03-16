@@ -3,10 +3,11 @@ body{
 }
 
 #leaderboardTitle{
-    /*width: 50%;
-    margin: auto;*/
+    padding: 8px;
+    width: 25.5%;
+    margin: auto;
     background-color: #fffdd0;
-    border: 10px solid darkred;
+    border: 5px solid darkred;
 }
 
 #leaderboardTable {

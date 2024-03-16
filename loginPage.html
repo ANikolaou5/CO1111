@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/loginPage.css">
     <link rel="stylesheet" href="css/style1.css">
+    <link rel="icon" href="TeamLogo.png" type="image/x-icon" />
+    <!--    <meta name="msapplication-TileImage" content="TeamLogo.png">-->
     <title>Login Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <section id="header" class="arrow-icon">
-    <a id="goBack_button"><i class='fas fa-arrow-circle-left'></i></a>
+    <span>
+        <a id="goBack_button"><i class='fas fa-arrow-circle-left'></i></a>
+        <a id="refresh_button"><i class="fa fa-refresh"></i></a>
+    </span>
     <img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo">
-
 </section>
 <img src="wallpaper1.jpeg" id="background-pic" alt="">
 <div class="content-container">
@@ -90,6 +95,12 @@
     let goBack_button=document.getElementById("goBack_button");
     goBack_button.addEventListener("click", function() {
         window.history.back();  // Navigate to the previous page in the browser's history
+    });
+
+    let refresh_button = document.getElementById("refresh_button");
+    refresh_button.addEventListener('click', function() {
+        // Reload the page
+        location.reload();
     });
 </script>
 </body>
