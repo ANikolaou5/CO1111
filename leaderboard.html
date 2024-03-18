@@ -5,10 +5,19 @@
     <meta charset="UTF-8">
     <title>Leaderboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="TeamLogo.png" type="image/x-icon" />
+    <!--    <meta name="msapplication-TileImage" content="TeamLogo.png">-->
     <link rel="stylesheet" href="css/leaderboard.css">
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
+<section id="header" class="arrow-icon">
+        <a id="refresh_button"><i class="fa fa-refresh"></i></a>
+    <a href="index.html"><img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo"></a>
+</section>
+<br>
 <img src="wallpaper1.jpeg"  id="leaderboardBackground" alt="">
     <h2 id="leaderboardTitle">
         <span id="leaderboardSpan">
@@ -17,6 +26,7 @@
             <img src="Star.png"  class="star" alt="">
         </span>
     </h2>
+<br>
     <div id="leaderBoardDiv">
         <table id="leaderboardTable">
             <tr>
@@ -55,6 +65,12 @@
     }
 
     getLeaderBoard();
+
+    let refresh_button = document.getElementById("refresh_button");
+    refresh_button.addEventListener('click', function() {
+        // Reload the page
+        location.reload();
+    });
 </script>
 </body>
 </html>

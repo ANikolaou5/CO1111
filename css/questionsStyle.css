@@ -40,10 +40,6 @@
     transition: background-color 0.3s ease;
 }
 
-#answer-form button:hover {
-    background-color: #8B0000;
-}
-
 #skipButton{
     display: none;
 }

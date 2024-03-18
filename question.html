@@ -3,15 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Question</title>
+    <script src="js/instascan.min.js"></script>
+    <link rel="icon" href="TeamLogo.png" type="image/x-icon" />
+    <!--    <meta name="msapplication-TileImage" content="TeamLogo.png">-->
     <link rel="stylesheet" href="css/style1.css">
     <link rel="stylesheet" href="css/questionsStyle.css">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <section id="header" class="arrow-icon">
-    <a id="goBack_button"><i class='fas fa-arrow-circle-left'></i></a>
+    <span>
+        <a id="goBack_button"><i class='fas fa-arrow-circle-left'></i></a>
+        <a id="refresh_button"><i class="fa fa-refresh"></i></a>
+    </span>
     <a href="index.html"><img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo"></a>
+    <button id="buttonQR" class="QRButton" onclick="QRCode();">Click to scan</button>
+    <div id="QRCodeId" class="QRCodeClass">
+        <!-- Modal content -->
+        <div class="QRCodeContent">
+            <span class="close" onclick="closeQRCode();">&times;</span>
+            <h3>QR Code Scanner</h3><br>
+            <video id="preview"></video>
+            <button id="frontCamera" class="QRButton">Front Camera</button>
+            <button id="backCamera" class="QRButton">Back Camera</button>
+        </div>
+    </div>
     <div id="score"></div>
 </section>
 <img src="wallpaper1.jpeg" id="background-pic" alt="">
@@ -35,6 +53,103 @@
     let skip = document.getElementById("skipButton");
     let scoreDiv = document.getElementById("score");
     let sessionId = new URLSearchParams(location.search).get("session");
+
+    let currentCameraIndex = 0;
+    let cameras = [];
+    let scanner;
+
+    function QRCode() {
+
+        // document.getElementById("buttonQR").style.display = 'none';
+        document.getElementById('QRCodeId').style.display = 'block';
+
+        // Initialize QR scanner
+        let video = document.getElementById('preview');
+
+        var opts = {
+            // Whether to scan continuously for QR codes. If false, use scanner.scan() to
+            // manually scan. If true, the scanner emits the "scan" event when a QR code is
+            // scanned. Default true.
+            continuous: true,
+
+            // The HTML element to use for the camera's video preview. Must be a <video>
+            // element. When the camera is active, this element will have the "active" CSS
+            // class, otherwise, it will have the "inactive" class. By default, an invisible
+            // element will be created to host the video.
+            video: video,
+
+            // Whether to horizontally mirror the video preview. This is helpful when trying to
+            // scan a QR code with a user-facing camera. Default true.
+            mirror: true,
+
+            // Whether to include the scanned image data as part of the scan result. See the
+            // "scan" event for image format details. Default false.
+            captureImage: false,
+
+            // Only applies to continuous mode. Whether to actively scan when the tab is not
+            // active.
+            // When false, this reduces CPU usage when the tab is not active. Default true.
+            backgroundScan: true,
+
+            // Only applies to continuous mode. The period, in milliseconds, before the same QR
+            // code will be recognized in succession. Default 5000 (5 seconds).
+            refractoryPeriod: 5000,
+
+            // Only applies to continuous mode. The period, in rendered frames, between scans. A
+            // lower scan period increases CPU usage but makes scan response faster.
+            // Default 1 (i.e. analyze every frame).
+            scanPeriod: 1
+        };
+
+        scanner = new Instascan.Scanner(opts);
+
+        Instascan.Camera.getCameras().then(function (availableCameras) {
+            cameras = availableCameras;
+            if (cameras.length > 0) {
+                selectCamera(currentCameraIndex);
+            } else {
+                console.error('No cameras found.');
+                alert("No cameras found.");
+            }
+        }).catch(function (e) {
+            console.error(e);
+        });
+
+        scanner.addListener('scan', function (content) {
+            console.log(content);
+            alert('QR code scanned: ' + content);
+            // Close the modal after scanning
+            closeQRCode();
+        });
+
+        function selectCamera(index) {
+            /*scanner.start(cameras[index]);
+            document.getElementById('preview').style.display = 'block';*/
+
+            scanner.start(cameras[index]);
+        }
+    }
+
+    function closeQRCode() {
+        // Hide the modal
+        document.getElementById('QRCodeId').style.display = 'none';
+        // Stop the scanner
+        scanner.stop();
+    }
+
+   document.getElementById('frontCamera').addEventListener('click', function() {
+        if (cameras.length > 1) {
+            currentCameraIndex = (currentCameraIndex + 1) % cameras.length;
+            selectCamera(currentCameraIndex);
+        }
+    });
+
+    document.getElementById('backCamera').addEventListener('click', function() {
+        if (cameras.length > 1) {
+            currentCameraIndex = (currentCameraIndex - 1 + cameras.length) % cameras.length;
+            selectCamera(currentCameraIndex);
+        }
+    });
 
     function getQuestion(){
         getScore();
@@ -162,6 +277,12 @@
     let goBack_button = document.getElementById("goBack_button");
     goBack_button.addEventListener("click", function() {
         window.history.back();
+    });
+
+    let refresh_button = document.getElementById("refresh_button");
+    refresh_button.addEventListener('click', function() {
+        // Reload the page
+        location.reload();
     });
 </script>
 </body>
