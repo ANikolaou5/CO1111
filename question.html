@@ -20,6 +20,7 @@
     </span>
     <a href="index.html"><img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo"></a>
     <button id="buttonQR" class="QRButton" onclick="QRCode();">Click to scan</button>
+    <button id="buttonLB" class="LBButton">Leaderboard</button>
     <div id="QRCodeId" class="QRCodeClass">
         <!-- Modal content -->
         <div class="QRCodeContent">
@@ -32,6 +33,21 @@
     </div>
     <div id="score"></div>
 </section>
+
+<div id="leaderboardModal" class="modal">
+    <div class="modal-content">
+        <span class="closeLB">&times;</span>
+        <h2 id="leaderboardTitle" style="padding: 8px; width: 25.5%; margin: auto; background-color: #fffdd0; border: 5px solid darkred; display: flex; align-items: center; justify-content: center;">
+            <img src="Star.png" class="star" alt="" style="width: 8%;">
+            Leaderboard
+            <img src="Star.png" class="star" alt="" style="width: 8%;">
+        </h2>
+        <div id="leaderBoardContent" style="font-family: Papyrus, fantasy; margin: auto; width: 80%; border: 4px solid darkred; background-color: #fffdd0; border-bottom: 3px solid darkred;">
+            Loading...
+        </div>
+    </div>
+</div>
+
 <img src="wallpaper1.jpeg" id="background-pic" alt="">
 
 <div id="question-container">
@@ -284,6 +300,64 @@
         // Reload the page
         location.reload();
     });
+
+
+    // Leaderboard settings
+    var modal = document.getElementById("leaderboardModal");
+
+    var btn = document.getElementById("buttonLB");
+
+    var span = document.getElementsByClassName("closeLB")[0];
+
+
+    // when the user clicks the button, open the lb
+    btn.onclick = function() {
+        modal.style.display = "block";
+        getLeaderBoard();
+    }
+
+    // if clicked on the cross = close the window
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // if clicked outside of the border = close the window
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+    function getLeaderBoard() {
+        let sessionId = new URLSearchParams(location.search).get("session");
+        fetch(`https://codecyprus.org/th/api/leaderboard?session=${sessionId}`)
+            .then(response => response.json())
+            .then(data => {
+                displayLeaderboard(data);
+            })
+            .catch(error => {
+                console.error('Error fetching leaderboard:', error);
+                document.getElementById('leaderBoardContent').innerHTML = 'Failed to load leaderboard.';
+            });
+    }
+
+
+    function displayLeaderboard(data) {
+        if (data.leaderboard && data.leaderboard.length > 0) {
+            let html = '<table>';
+            html += '<tr><th>Rank</th><th>Name</th><th>Score</th><th>Time</th></tr>';
+            data.leaderboard.forEach((entry, index) => {
+                let time = Math.round(entry.completionTime / 60000); // converting to minutes
+                html += `<tr><td>${index + 1}</td><td>${entry.player}</td><td>${entry.score}</td><td>${time} minutes</td></tr>`;
+            });
+            html += '</table>';
+            document.getElementById('leaderBoardContent').innerHTML = html;
+        } else {
+            document.getElementById('leaderBoardContent').innerHTML = 'No leaderboard data available.';
+        }
+    }
+
 </script>
 </body>
 </html>

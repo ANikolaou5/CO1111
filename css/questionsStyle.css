@@ -51,3 +51,99 @@
 #buttons button{
     margin-left: 5px;
 }
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    font-family: Papyrus, fantasy;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.closeLB {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeLB:hover,
+.closeLB:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#leaderboardTitle{
+    padding: 8px;
+    width: 25.5%;
+    margin: auto;
+    background-color: #fffdd0;
+    border: 5px solid darkred;
+}
+
+#leaderboardTable {
+    margin: auto;
+    width: 80%;
+    border: 4px solid darkred;
+    background-color: #fffdd0;
+}
+
+#leaderboardTable th{
+    font-size: 18px;
+}
+
+#leaderboardTable td{
+    font-size: 12px;
+}
+
+#leaderboardTable th, #leaderboardTable td {
+    border-bottom: 3px solid darkred;
+    text-align: left;
+    font-weight: bold;
+    padding: 1px;
+}
+#leaderboardBackground{
+    position: fixed;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+.tab1{
+    tab-size: 4;
+    margin-left: 18px;
+}
+#leaderBoardDiv{
+    border-bottom: 3px solid darkred;
+}
+
+.star{
+    width: 8%;
+}
+
+#leaderboardSpan{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
