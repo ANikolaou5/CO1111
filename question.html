@@ -54,12 +54,13 @@
     <div id="question-text"></div>
     <form id="answer-form">
         <input id="answer-input" type="text" placeholder="Your answer..." required />
-        <span id="buttons">
-            <button type="submit">Submit Answer</button>
-            <button type="button" id="skipButton">Skip Question</button>
-        </span>
+        <div id="buttons">
+<!--            here will go dynamically added buttons (true/false and etc)-->
+        </div>
+        <button type="button" id="skipButton" style="display: none;">Skip Question</button>
     </form>
 </div>
+
 
 <script>
     const questionContainer = document.getElementById("question-container");
@@ -190,45 +191,42 @@
     }
 
     function updateInputField(questionType) {
-        answerInput.style.display = "none";
         const buttonsContainer = document.getElementById('buttons');
-        Array.from(buttonsContainer.children).forEach(child => {
-            if(child.id !== "skipButton") {
-                buttonsContainer.removeChild(child);
-            }
-        });
+        answerInput.style.display = "none";
+        buttonsContainer.innerHTML = '';
 
-        if (questionType === "BOOLEAN") {
-            createAnswerButtons(["True", "False"]);
-        } else if (questionType === "MCQ") {
-            createAnswerButtons(["A", "B", "C", "D"]);
+        if (questionType === "BOOLEAN" || questionType === "MCQ") {
+            const options = questionType === "BOOLEAN" ? ["True", "False"] : ["A", "B", "C", "D"];
+            createAnswerButtons(options);
         } else {
             answerInput.type = questionType === "INTEGER" ? "number" : "text";
             answerInput.placeholder = getPlaceholderText(questionType);
             answerInput.value = "";
             answerInput.style.display = "";
-            let existingSubmit = Array.from(buttonsContainer.children).some(child => child.type === 'submit');
-            if (!existingSubmit) {
+
+
+            const submitButtonExists = Array.from(buttonsContainer.children).some(child => child.type === 'submit');
+            if (!submitButtonExists) {
                 const submitButton = document.createElement('button');
                 submitButton.type = 'submit';
                 submitButton.textContent = 'Submit Answer';
-                buttonsContainer.insertBefore(submitButton, skipButton);
+                buttonsContainer.appendChild(submitButton);
             }
         }
     }
 
-
     function createAnswerButtons(options) {
         const buttonsContainer = document.getElementById('buttons');
-        const skipButton = document.getElementById('skipButton');
         options.forEach(option => {
             const button = document.createElement('button');
             button.type = 'button';
             button.textContent = option;
             button.onclick = function() { submitAnswer(option); };
-            buttonsContainer.insertBefore(button, skipButton);
+            buttonsContainer.appendChild(button);
         });
     }
+
+
 
     function getPlaceholderText(questionType) {
         switch(questionType) {

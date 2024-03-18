@@ -40,13 +40,17 @@
     transition: background-color 0.3s ease;
 }
 
-#skipButton{
-    display: none;
+#buttons {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-#buttons{
-    display: flex;
+#skipButton {
+    display: block;
+    margin-top: 10px;
 }
+
 
 #buttons button{
     margin-left: 5px;
