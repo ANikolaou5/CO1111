@@ -23,13 +23,12 @@
     <button id="buttonQR" class="QRButton" onclick="QRCode();">Click to scan</button>
     <button id="buttonLB" class="LBButton">Leaderboard</button>
     <div id="QRCodeId" class="QRCodeClass">
-        <!-- Modal content -->
         <div class="QRCodeContent">
             <span class="close" onclick="closeQRCode();">&times;</span>
-            <h3>QR Code Scanner</h3><br>
-            <video id="preview"></video>
-            <button id="frontCamera" class="QRButton">Front Camera</button>
-            <button id="backCamera" class="QRButton">Back Camera</button>
+            <div id="QRContent">
+                <h3>QR Code Scanner</h3><br>
+                <video id="preview"></video>
+            </div>
         </div>
     </div>
     <div id="score"></div>
@@ -90,8 +89,6 @@
         location.href = 'loginPage.html';
     }
 
-    let currentCameraIndex = 0;
-    let cameras = [];
     let scanner;
 
     function QRCode() {
@@ -139,10 +136,13 @@
 
         scanner = new Instascan.Scanner(opts);
 
-        Instascan.Camera.getCameras().then(function (availableCameras) {
-            cameras = availableCameras;
-            if (cameras.length > 0) {
-                selectCamera(currentCameraIndex);
+        Instascan.Camera.getCameras().then(function (cameras) {
+            const backCamera = cameras.find(camera => camera.name.includes('back'));
+            if (backCamera) {
+                scanner.start(backCamera);
+            } else if (cameras.length > 0) {
+                // If back camera is not available, fallback to the first available camera
+                scanner.start(cameras[0]);
             } else {
                 console.error('No cameras found.');
                 alert("No cameras found.");
@@ -152,40 +152,16 @@
         });
 
         scanner.addListener('scan', function (content) {
-            console.log(content);
-            alert('QR code scanned: ' + content);
-            // Close the modal after scanning
+            video.style.display = 'none';
+            document.getElementById("QRContent").innerHTML = content;
             closeQRCode();
         });
-
-        function selectCamera(index) {
-            /*scanner.start(cameras[index]);
-            document.getElementById('preview').style.display = 'block';*/
-
-            scanner.start(cameras[index]);
-        }
     }
 
     function closeQRCode() {
-        // Hide the modal
-        document.getElementById('QRCodeId').style.display = 'none';
-        // Stop the scanner
+        document.getElementById("QRCodeId").style.display = 'none';
         scanner.stop();
     }
-
-    document.getElementById('frontCamera').addEventListener('click', function() {
-        if (cameras.length > 1) {
-            currentCameraIndex = (currentCameraIndex + 1) % cameras.length;
-            selectCamera(currentCameraIndex);
-        }
-    });
-
-    document.getElementById('backCamera').addEventListener('click', function() {
-        if (cameras.length > 1) {
-            currentCameraIndex = (currentCameraIndex - 1 + cameras.length) % cameras.length;
-            selectCamera(currentCameraIndex);
-        }
-    });
 
     function getQuestion(){
         getScore();
