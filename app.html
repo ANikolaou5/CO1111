@@ -35,6 +35,7 @@
 
 <script>
     function getChallenges() {
+        console.log('getChallenges app-html');
         fetch("https://codecyprus.org/th/api/list")
             .then(response => response.json())
             .then(jsonObject => {
@@ -42,6 +43,7 @@
                 let challengesList = document.getElementById("challenges");
                 let treasureHuntsArray = jsonObject.treasureHunts;
                 let currentDate = new Date();
+                console.log(treasureHuntsArray);
                 for (let i = 0; i < treasureHuntsArray.length; i++) {
                     let listItem = document.createElement("li");
                     const uuid = treasureHuntsArray[i].uuid;
@@ -91,3 +93,4 @@
 </script>
 </body>
 </html>
+

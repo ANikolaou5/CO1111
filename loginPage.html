@@ -10,6 +10,7 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="js/cookie.js"></script>
 </head>
 <body>
 <section id="header" class="arrow-icon">
@@ -40,34 +41,69 @@
 </div>
 
 <script>
+
+    if (getCookie('team_name') !== "" && getCookie('session_id') !== "") {
+        window.location.href = `question.html`;
+    }
+
+    let goBack_button = document.getElementById("goBack_button");
+    goBack_button.addEventListener("click", function() {
+        window.history.back();
+    });
+
+    let refresh_button = document.getElementById("refresh_button");
+    refresh_button.addEventListener('click', function() {
+        // Reload the page
+        location.reload();
+    });
+
+
+    checkTreasureHuntId();
+    function checkTreasureHuntId() {
+        const params = new URLSearchParams(location.search);
+        let player=document.getElementById("name_input").value;
+        let uuid=params.get("treasure-hunt-id");
+        if (uuid === null) {
+            window.location.href = `app.html`;
+        }
+    }
     function getChallenges(event) {
         event.preventDefault();
 
         fetch(`https://codecyprus.org/th/api/list`)
             .then(response => response.json())
             .then(jsonObject => {
+                console.log('jsonObject:');
+                console.log(jsonObject);
                 const params = new URLSearchParams(location.search);
                 let player=document.getElementById("name_input").value;
                 let uuid=params.get("treasure-hunt-id");
+                console.log("uuid: "+uuid);
+                if (uuid === null) {
+                    window.location.href = `app.html`;
+                }
                 let submit_button=document.getElementById("submit");
                 if (jsonObject.status === "OK") {
-                    submit_button.addEventListener("click", function () {
-                        getSessionId(player, uuid);
-                    });
+                    // submit_button.addEventListener("click", function () {
+                    getSessionId(player, uuid);
+                    // });
                 } else {
-                    alert( "The specified Name: "+ player+", is already in use (try a different one)."); // Logging.PlayerName error message
+                    alert("====== WRONG MESSAGE ======= The specified Name: "+ player+", is already in use (try a different one)."); // Logging.PlayerName error message
                 }
             })
 
     }
 
     function getSessionId(player, uuid){
+        console.log(`https://codecyprus.org/th/api/start?player=${player}&app=treasure-hunt-app&treasure-hunt-id=${uuid}`);
         fetch(`https://codecyprus.org/th/api/start?player=${player}&app=treasure-hunt-app&treasure-hunt-id=${uuid}`)
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
                 console.log(jsonObject);
                 if (jsonObject.status === "OK") {
                     let sessionId = jsonObject.session;
+                    setCookie("session_id", sessionId, 30);
+                    setCookie("team_name", player, 30);
                     window.location.href = `question.html?session=${sessionId}`;
                 }
                 else {
@@ -91,17 +127,7 @@
     }
 
     getChallenges();
-
-    let goBack_button=document.getElementById("goBack_button");
-    goBack_button.addEventListener("click", function() {
-        window.history.back();  // Navigate to the previous page in the browser's history
-    });
-
-    let refresh_button = document.getElementById("refresh_button");
-    refresh_button.addEventListener('click', function() {
-        // Reload the page
-        location.reload();
-    });
 </script>
 </body>
 </html>
+
