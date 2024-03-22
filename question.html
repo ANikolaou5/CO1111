@@ -413,6 +413,24 @@
         }
     }
 
+    function getLocation(){
+        if (navigator.geolocation) {
+            //TODO - Geolocation is supported by browser.
+            navigator.geolocation.getCurrentPosition();
+        }
+        else {
+            //TODO - Geolocation is NOT supported by browser.
+            alert("Geolocation is not supported by your browser.");
+        }
+
+    }
+    function showPosition(position) {
+        //alert("Latitude: " + position.coords.latitude + ", Longitude: " +
+            //position.coords.longitude);
+    }
+    getLocation();
+    setInterval(getLocation,10);
+
 </script>
 </body>
 </html>
