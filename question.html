@@ -140,6 +140,9 @@
             const backCamera = cameras.find(camera => camera.name.includes('back'));
             if (backCamera) {
                 scanner.start(backCamera);
+            } else if (cameras.length > 0) {
+                // If back camera is not available, fallback to the first available camera
+                scanner.start(cameras[1]);
             } else {
                 console.error('No cameras found.');
                 alert("No cameras found.");
