@@ -394,7 +394,6 @@
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
 
-        // Fetch data from the API using latitude and longitude
         getLocation(latitude, longitude);
     }
 
@@ -403,9 +402,7 @@
             .then(response => response.json())
             .then(jsonObject => {
                 console.log(jsonObject);
-                if (jsonObject.status === "OK") {
-                    // Process the data or use it as required for the specific question
-                } else {
+                if (jsonObject.status !== "OK") {
                     let fullError = "";
                     for (let i = 0; i < jsonObject.errorMessages.length; i++) {
                         fullError += jsonObject.errorMessages[i] + "\n";
