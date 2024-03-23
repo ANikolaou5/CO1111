@@ -95,7 +95,6 @@
     }
 
     function getSessionId(player, uuid){
-        console.log(`https://codecyprus.org/th/api/start?player=${player}&app=treasure-hunt-app&treasure-hunt-id=${uuid}`);
         fetch(`https://codecyprus.org/th/api/start?player=${player}&app=treasure-hunt-app&treasure-hunt-id=${uuid}`)
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
