@@ -20,7 +20,7 @@
         .tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
         .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
 
-        .testingTable{
+        .testingTable, .defaultTable{
             width: 80%;
             background-color: #c7b198;
             font-weight: bold;
@@ -38,6 +38,48 @@
     <a href="index.html"><img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo"></a>
 </section><br>
 <h2>Get Treasure Hunts Test</h2><br>
+<h2>Here is our tests:</h2><br>
+<table class="tg defaultTable">
+    <thead>
+    <tr>
+        <th class="tg-fymr">Test ID</th>
+        <th class="tg-fymr">Input</th>
+        <th class="tg-fymr">Expected output</th>
+        <th class="tg-fymr">Actual output</th>
+        <th class="tg-fymr">Result</th>
+    </tr>
+    </thead>
+    <tr>
+        <td class="tg-0pky">1</td>
+        <td class="tg-0pky">0</td>
+        <td class="tg-0pky">0</td>
+        <td class="tg-0pky">0</td>
+        <td class="tg-0pky">Pass</td>
+    </tr>
+    <tr>
+        <td class="tg-0pky">1</td>
+        <td class="tg-0pky">1</td>
+        <td class="tg-0pky">1</td>
+        <td class="tg-0pky">1</td>
+        <td class="tg-0pky">Pass</td>
+    </tr>
+    <tr>
+        <td class="tg-0pky">1</td>
+        <td class="tg-0pky">-1</td>
+        <td class="tg-0pky">-1</td>
+        <td class="tg-0pky">10</td>
+        <td class="tg-0pky">Fail</td>
+    </tr>
+    <tr>
+        <td class="tg-0pky">1</td>
+        <td class="tg-0pky">null</td>
+        <td class="tg-0pky">null</td>
+        <td class="tg-0pky">10</td>
+        <td class="tg-0pky">Fail</td>
+    </tr>
+</table>
+<br>
+<h2>Live Testing</h2><br>
 <input type="number" step="1" id="numOfTreasureHuntsInput" required/><br>
 <input type="button" onclick="runTest()" value="Run test"/>
 

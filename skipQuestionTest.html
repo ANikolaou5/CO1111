@@ -20,7 +20,7 @@
         .tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
         .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
 
-        .testingTable{
+        .testingTable, .defaultTable{
             width: 80%;
             background-color: #c7b198;
             font-weight: bold;
@@ -38,6 +38,38 @@
     <a href="index.html"><img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo"></a>
 </section><br>
 <h2>Skip Question Test</h2><br>
+<p>Here we are testing if a question can be skipped. Enter true or false:</p>
+<h2>Here is our tests:</h2><br>
+<table class="tg defaultTable">
+    <thead>
+    <tr>
+        <th class="tg-fymr">Test ID</th>
+        <th class="tg-fymr">Input</th>
+        <th class="tg-fymr">Expected output</th>
+        <th class="tg-fymr">Actual output</th>
+        <th class="tg-fymr">Result</th>
+    </tr>
+    </thead>
+    <tr>
+        <td class="tg-0pky">5</td>
+        <td class="tg-0pky">true</td>
+        <td class="tg-0pky">true</td>
+        <td class="tg-0pky">false</td>
+        <td class="tg-0pky">Fail</td>
+    </tr>
+    <tr>
+        <td class="tg-0pky">5</td>
+        <td class="tg-0pky">false</td>
+        <td class="tg-0pky">false</td>
+        <td class="tg-0pky">false</td>
+        <td class="tg-0pky">Pass</td>
+    </tr>
+
+</table>
+<br>
+<h2>Live Testing</h2><br>
+<input type="text" step="1" id="skipInput" required/><br>
+<input type="button" onclick="runTest()" value="Run test"/>
 <h2>Test Results</h2><br>
 
 <table class="tg testingTable">
@@ -50,31 +82,47 @@
         <th class="tg-fymr">Result</th>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-    </tr>
-    <tr>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-    </tr>
-    <tr>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-    </tr>
-    </tbody>
 </table>
+
 <script>
+    function runTest() {
+        const skipInput = document.getElementById("skipInput");
+        const skip = skipInput.value;
+        skipQuestion(skip);
+    }
+
+    function skipQuestion(skip) {
+        let skipBool;
+        if (skip==="true"){
+            skipBool=true;
+        }
+        else if (skip==="false"){
+            skipBool=false;
+        }
+        fetch(`https://codecyprus.org/th/test-api/question?canBeSkipped=${skipBool}`)
+            .then(response => response.json())
+            .then(jsonObject => {
+                if (jsonObject.status === "OK") {
+                    console.log(jsonObject);
+                    let skipCorrect = jsonObject.canBeSkipped;
+                    let result = skipBool === skipCorrect ? 'Pass' : 'Fail';
+
+
+                    let html = "";
+                    html += "<tr>" +
+                        "<td>5</td>" +
+                        "<td>" + skip + "</td>" +
+                        "<td>" + skip + "</td>" +
+                        "<td>" + skipCorrect + "</td>" +
+                        "<td>" + result + "</td>" +
+                        "</tr>";
+
+                    let testingTable = document.querySelector('.testingTable');
+                    testingTable.innerHTML += html;
+                }
+            });
+    }
+
     let goBack_button=document.getElementById("goBack_button");
     goBack_button.addEventListener("click", function() {
         window.history.back();  // Navigate to the previous page in the browser's history

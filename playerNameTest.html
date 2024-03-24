@@ -20,7 +20,7 @@
         .tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
         .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
 
-        .testingTable{
+        .testingTable, .defaultTable{
             width: 80%;
             background-color: #c7b198;
             font-weight: bold;
@@ -39,7 +39,42 @@
 </section><br>
 <h2>Player Name Test</h2><br>
 <h2>Test Results</h2><br>
-
+<p>Here we are testing if the player name is null or already exists. Enter "player" for the case that the player name already existing or leave the input field empty:</p>
+<h2>Here is our tests:</h2><br>
+<table class="tg defaultTable">
+    <thead>
+    <tr>
+        <th class="tg-fymr">Test ID</th>
+        <th class="tg-fymr">Input</th>
+        <th class="tg-fymr">Expected output</th>
+        <th class="tg-fymr">Actual output</th>
+        <th class="tg-fymr">Result</th>
+    </tr>
+    </thead>
+    <tr>
+        <td class="tg-0pky">2</td>
+        <td class="tg-0pky">player</td>
+        <td class="tg-0pky">ERROR</td>
+        <td class="tg-0pky">ERROR</td>
+        <td class="tg-0pky">Pass</td>
+    </tr>
+    <tr>
+        <td class="tg-0pky">2</td>
+        <td class="tg-0pky">null</td>
+        <td class="tg-0pky">OK</td>
+        <td class="tg-0pky">OK</td>
+        <td class="tg-0pky">Pass</td>
+    </tr>
+    <tr>
+        <td class="tg-0pky">2</td>
+        <td class="tg-0pky">-1</td>
+        <td class="tg-0pky">OK</td>
+        <td class="tg-0pky">ERROR</td>
+        <td class="tg-0pky">Fail</td>
+    </tr>
+</table>
+<br>
+<h2>Live Testing</h2><br>
 <input type="text" id="playerNameInput" required/><br>
 <input type="button" onclick="runTest()" value="Run test"/>
 
@@ -58,101 +93,40 @@
 </table>
 
 <script>
-    // function runTest() {
-    //     const playerNameInput = document.getElementById("playerNameInput");
-    //     const playerName = playerNameInput.value;
-    //     playerNameTest(playerName);
-    // }
-    //
-    // function playerNameTest(numOfTreasureHunts) {
-    //     fetch(`https://codecyprus.org/th/test-api/start?player=inactive`)
-    //         .then(response => response.json())
-    //         .then(jsonObject => {
-    //             if (jsonObject.status === "OK") {
-    //                 console.log(jsonObject);
-    //                 let treasureHunts = jsonObject.treasureHunts;
-    //                 let expectedOutput = parseInt(numOfTreasureHunts); // Convert input to integer for comparison
-    //                 let actualOutput = parseInt(treasureHunts.length); // Convert input to integer for comparison
-    //                 let result = expectedOutput === actualOutput ? 'Pass' : 'Fail';
-    //
-    //
-    //                 let html = "";
-    //                 html += "<tr>" +
-    //                     "<td>2</td>" +
-    //                     "<td>" + numOfTreasureHunts + "</td>" +
-    //                     "<td>" + numOfTreasureHunts + "</td>" +
-    //                     "<td>" + treasureHunts.length + "</td>" +
-    //                     "<td>" + result + "</td>" +
-    //                     "</tr>";
-    //
-    //                 let testingTable = document.querySelector('.testingTable');
-    //                 testingTable.innerHTML += html;
-    //             }
-    //         });
-    // }
-    // Function to fetch data from the API
-    function fetchDataFromApi(playerName) {
-        const sessionId = "ag9nfmNvZGVjeXBydXNvcmdyFAsSB1Nlc3Npb24YgICAoMa0gQoM";
+    function runTest() {
+        const playerNameInput = document.getElementById("playerNameInput");
+        const playerName = playerNameInput.value;
+        getSessionId(playerName);
+    }
+
+    function getSessionId(playerName) {
         fetch(`https://codecyprus.org/th/test-api/start?player=${playerName}`)
             .then(response => response.json())
             .then(jsonObject => {
-                if (jsonObject.status === "OK") {
-                    console.log(jsonObject);
-                } else {
-                    handleApiError(jsonObject);
+                console.log(jsonObject);
+                let expectedOutput;
+                if(playerName === "player"){
+                    expectedOutput = "ERROR";
                 }
+                else{
+                    expectedOutput = "OK";
+                }
+
+                let result = expectedOutput === jsonObject.status ? 'Pass' : 'Fail';
+
+                let html = "";
+                html += "<tr>" +
+                    "<td>2</td>" +
+                    "<td>" + playerName + "</td>" +
+                    "<td>" + expectedOutput + "</td>" +
+                    "<td>" + jsonObject.status + "</td>" +
+                    "<td>" + result + "</td>" +
+                    "</tr>";
+
+                let testingTable = document.querySelector('.testingTable');
+                testingTable.innerHTML += html;
             })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-                alert("Error fetching data from the API.");
-            });
     }
-
-    // Function to handle API errors and display corresponding error messages
-    function handleApiError(jsonObject) {
-        let errorMessage = "";
-
-        switch (jsonObject.errorType) {
-            case "INACTIVE":
-                errorMessage = "The specified treasure hunt is not active right now.";
-                break;
-            case "EMPTY":
-                errorMessage = "The specified treasure hunt is empty (i.e. contains no questions).";
-                break;
-            case "PLAYER":
-                errorMessage = `The specified playerName: ${jsonObject.playerName}, is already in use (try a different one).`;
-                break;
-            case "APP":
-                errorMessage = "Missing or empty parameter: app";
-                break;
-            case "UNKNOWN":
-                errorMessage = `Could not find a treasure hunt for the specified id: ${jsonObject.id}`;
-                break;
-            case "MISSING_PARAMETER":
-                errorMessage = jsonObject.errorMessages.join("\n");
-                break;
-            default:
-                errorMessage = "An unknown error occurred.";
-        }
-
-        console.log(errorMessage);
-    }
-
-    // Test each error message type by passing different playerName values
-    // 1. INACTIVE
-    fetchDataFromApi("INACTIVE");
-    // 2. EMPTY
-    fetchDataFromApi("EMPTY");
-    // 3. PLAYER
-    fetchDataFromApi("Homer");
-    // 4. APP
-    fetchDataFromApi("APP");
-    // 5. UNKNOWN
-    fetchDataFromApi("UNKNOWN");
-    // 6. MISSING_PARAMETER
-    fetchDataFromApi("MISSING_PARAMETER");
-    // 7. Default correct message with random data (skip the parameter)
-    fetchDataFromApi();
 
     let goBack_button=document.getElementById("goBack_button");
     goBack_button.addEventListener("click", function() {

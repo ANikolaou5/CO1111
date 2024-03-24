@@ -20,7 +20,7 @@
         .tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
         .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
 
-        .testingTable{
+        .testingTable, .defaultTable{
             width: 80%;
             background-color: #c7b198;
             font-weight: bold;
@@ -38,6 +38,51 @@
     <a href="index.html"><img src="codecyprus_logo.png" class="logo" alt="Code Cyprus Logo"></a>
 </section><br>
 <h2>Get Leaderboard Test</h2><br>
+
+<h2>Here is our tests:</h2><br>
+<table class="tg defaultTable">
+    <thead>
+    <tr>
+        <th class="tg-fymr">Test ID</th>
+        <th class="tg-fymr">Input</th>
+        <th class="tg-fymr">Expected output</th>
+        <th class="tg-fymr">Actual output</th>
+        <th class="tg-fymr">Result</th>
+    </tr>
+    </thead>
+    <tr>
+        <td class="tg-0pky">8</td>
+        <td class="tg-0pky">0</td>
+        <td class="tg-0pky">0</td>
+        <td class="tg-0pky">0</td>
+        <td class="tg-0pky">Pass</td>
+    </tr>
+    <tr>
+        <td class="tg-0pky">8</td>
+        <td class="tg-0pky">-1</td>
+        <td class="tg-0pky">-1</td>
+        <td class="tg-0pky">42</td>
+        <td class="tg-0pky">Fail</td>
+    </tr>
+    <tr>
+        <td class="tg-0pky">8</td>
+        <td class="tg-0pky">1</td>
+        <td class="tg-0pky">1</td>
+        <td class="tg-0pky">1</td>
+        <td class="tg-0pky">Pass</td>
+    </tr>
+    <tr>
+        <td class="tg-0pky">8</td>
+        <td class="tg-0pky"></td>
+        <td class="tg-0pky"></td>
+        <td class="tg-0pky">42</td>
+        <td class="tg-0pky">Fail</td>
+    </tr>
+</table>
+<br>
+<h2>Live Testing</h2><br>
+<input type="number" step="1" id="entriesInput" required/><br>
+<input type="button" onclick="runTest()" value="Run test"/>
 <h2>Test Results</h2><br>
 
 <table class="tg testingTable">
@@ -50,31 +95,39 @@
         <th class="tg-fymr">Result</th>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-    </tr>
-    <tr>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-    </tr>
-    <tr>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-        <td class="tg-0pky"></td>
-    </tr>
-    </tbody>
 </table>
 <script>
+    function runTest() {
+        const entriesInput = document.getElementById("entriesInput");
+        const entries = entriesInput.value;
+        getLeaderBoard(entries);
+    }
+
+    function getLeaderBoard(entries) {
+        fetch(`https://codecyprus.org/th/test-api/leaderboard?size=${entries}`)
+            .then(response => response.json())
+            .then(jsonObject => {
+                if (jsonObject.status === "OK") {
+                    console.log(jsonObject);
+                    let expectedOutput = parseInt(entries); // Convert input to integer for comparison
+                    let actualOutput = parseInt(jsonObject.numOfPlayers); // Convert input to integer for comparison
+                    let result = expectedOutput === actualOutput ? 'Pass' : 'Fail';
+
+                    let html = "";
+                    html += "<tr>" +
+                        "<td>8</td>" +
+                        "<td>" + entries + "</td>" +
+                        "<td>" + entries + "</td>" +
+                        "<td>" + jsonObject.numOfPlayers + "</td>" +
+                        "<td>" + result + "</td>" +
+                        "</tr>";
+
+                    let testingTable = document.querySelector('.testingTable');
+                    testingTable.innerHTML += html;
+                }
+            });
+    }
+
     let goBack_button=document.getElementById("goBack_button");
     goBack_button.addEventListener("click", function() {
         window.history.back();  // Navigate to the previous page in the browser's history
