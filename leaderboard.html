@@ -40,6 +40,8 @@
     </div>
 
 <script>
+    deleteCookie("session_id");
+    deleteCookie("team_name");
     let sessionId = new URLSearchParams(location.search).get("session");
 
     function handleLeaderboard(leaderboard) {
