@@ -75,17 +75,17 @@
     if (url.has('session')) {
         sessionId = url.get('session');
     }
-    // let cookie_sessionId = getCookie('session_id');
-    //
-    // console.log('sessionId: '+sessionId);
-    // console.log('cookie_sessionId: '+cookie_sessionId);
-    //
-    // if (sessionId == null && cookie_sessionId !== "") {
-    //     location.href= 'question.html?session='+cookie_sessionId;
-    // }
-    // else if (sessionId == null && cookie_sessionId == "") {
-    //     location.href = 'loginPage.html';
-    // }
+    let cookie_sessionId = getCookie('session_id');
+
+    console.log('sessionId: '+sessionId);
+    console.log('cookie_sessionId: '+cookie_sessionId);
+
+    if (sessionId == null && cookie_sessionId !== "") {
+        location.href= 'question.html?session='+cookie_sessionId;
+    }
+    else if (sessionId == null && cookie_sessionId == "") {
+        location.href = 'loginPage.html';
+    }
 
     let scanner;
 
