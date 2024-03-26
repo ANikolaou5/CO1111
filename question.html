@@ -51,20 +51,19 @@
 <img src="wallpaper1.jpeg" id="background-pic" alt="">
 
 <div id="question-container">
-    <div id="question-text"></div>
+    <div id="question-text">
+        <img id="pirateImg" class="logo" src="catPirate.png" alt="Pirate">
+    </div>
     <form id="answer-form">
         <input id="answer-input" type="text" placeholder="Your answer..." required />
         <div id="buttons">
             <!--here will go dynamically added buttons (true/false and etc)-->
         </div>
-        <button type="button" id="skipButton" style="display: none;">Skip Question</button>
     </form>
 </div>
-
+<button type="button" id="skipButton" style="display: none;">Skip Question</button>
 
 <script>
-
-
     const questionContainer = document.getElementById("question-container");
     const questionText = document.getElementById("question-text");
     const answerForm = document.getElementById("answer-form");
@@ -169,7 +168,7 @@
             .then(jsonObject => {
                 console.log(jsonObject);
                 if (jsonObject.status === "OK") {
-                    questionText.innerHTML = jsonObject.questionText;
+                    questionText.innerHTML += jsonObject.questionText;
                     updateInputField(jsonObject.questionType);
                     if (jsonObject.canBeSkipped) {
                         skip.style.display = "block";

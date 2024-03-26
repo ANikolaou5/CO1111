@@ -173,7 +173,7 @@ nav a:hover {
     margin-top: 8%;
     margin-bottom: 20%;
     color: white;
-    background: linear-gradient(45deg, #8B0000, #D52B1E);
+    background: linear-gradient(45deg, rebeccapurple, #D52B1E);
     border: none;
     font-size: 20px;
     padding: 10px 20px;
@@ -184,7 +184,7 @@ nav a:hover {
 }
 
 #startButton:hover{
-    background: linear-gradient(45deg, #D52B1E, #8B0000);
+    background: linear-gradient(45deg, #D52B1E, rebeccapurple);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px);
     border: none;
@@ -393,7 +393,7 @@ hr {
     display: inline-block;
     padding: 10px 15px;
     font-size: 16px;
-    background-color: #8B0000;
+    background-color: rebeccapurple;
     color: white;
     border: none;
     border-radius: 5px;
