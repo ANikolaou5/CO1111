@@ -459,6 +459,14 @@ hr {
 /*MEDIA*/
 
 @media (max-width: 768px) {
+    #pirateImg {
+        width: 70%;
+    }
+
+    .logo {
+        width: 30% !important;
+        float: right;
+    }
 
     .content-container {
         padding: 20px;
