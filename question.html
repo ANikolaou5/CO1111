@@ -51,9 +51,8 @@
 <img src="wallpaper1.jpeg" id="background-pic" alt="">
 
 <div id="question-container">
-    <div id="question-text">
-        <img id="pirateImg" class="logo" src="catPirate.png" alt="Pirate">
-    </div>
+    <img id="pirateImg" class="logo" src="catPirate.png" alt="Pirate">
+    <div id="question-text"></div>
     <form id="answer-form">
         <input id="answer-input" type="text" placeholder="Your answer..." required />
         <div id="buttons">
@@ -75,17 +74,17 @@
     if (url.has('session')) {
         sessionId = url.get('session');
     }
-    let cookie_sessionId = getCookie('session_id');
-
-    console.log('sessionId: '+sessionId);
-    console.log('cookie_sessionId: '+cookie_sessionId);
-
-    if (sessionId == null && cookie_sessionId !== "") {
-        location.href= 'question.html?session='+cookie_sessionId;
-    }
-    else if (sessionId == null && cookie_sessionId == "") {
-        location.href = 'loginPage.html';
-    }
+    // let cookie_sessionId = getCookie('session_id');
+    //
+    // console.log('sessionId: '+sessionId);
+    // console.log('cookie_sessionId: '+cookie_sessionId);
+    //
+    // if (sessionId == null && cookie_sessionId !== "") {
+    //     location.href= 'question.html?session='+cookie_sessionId;
+    // }
+    // else if (sessionId == null && cookie_sessionId == "") {
+    //     location.href = 'loginPage.html';
+    // }
 
     let scanner;
 
@@ -168,7 +167,7 @@
             .then(jsonObject => {
                 console.log(jsonObject);
                 if (jsonObject.status === "OK") {
-                    questionText.innerHTML += jsonObject.questionText;
+                    questionText.innerHTML = jsonObject.questionText;
                     updateInputField(jsonObject.questionType);
                     if (jsonObject.canBeSkipped) {
                         skip.style.display = "block";
