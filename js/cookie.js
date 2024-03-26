@@ -6,7 +6,7 @@ function setCookie(name, value, days) {
     var cookie =document.cookie;
     console.log(name+value);
 }
-
+/*The code for these lines is from the source:https://www.w3schools.com/js/js_cookies.asp*/
 function getCookie(name) {
     let cookie_name = name + "=";
     let ca = document.cookie.split(';');
