@@ -49,7 +49,7 @@
         for (const entry of leaderboardArray) {
             var time = Math.round(entry['completionTime'] / 60000);
             html += "<tr>" +
-                "<td>" + index + ".  " + entry['player'] + "</td>" +
+                "<td>" + index + ".  " + entry['player'].substring(0,60) + "</td>" +   /*substring is from the source:https://javascript.plainenglish.io/javascript-get-first-n-characters-of-string-36b5425d6890*/
                 "<td>" + entry['score'] + "</td>" +
                 "<td>" + time + " minutes" + "</td>" +
                 "</tr>";
