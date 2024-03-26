@@ -27,7 +27,8 @@
             <span class="close" onclick="closeQRCode();">&times;</span>
             <div id="QRContent">
                 <h3>QR Code Scanner</h3><br>
-                <video id="preview"></video>
+                <video id="preview"></video><br>
+                <button id="traverseBtn"></button>
             </div>
         </div>
     </div>
@@ -86,14 +87,10 @@
         location.href = 'loginPage.html';
     }
 
-    let scanner;
-
     function QRCode() {
-
-        // document.getElementById("buttonQR").style.display = 'none';
         document.getElementById('QRCodeId').style.display = 'block';
+        document.getElementById('traverseBtn').style.display = 'block';
 
-        // Initialize QR scanner
         let video = document.getElementById('preview');
 
         var opts = {
@@ -131,15 +128,13 @@
             scanPeriod: 1
         };
 
-        scanner = new Instascan.Scanner(opts);
+        let scanner = new Instascan.Scanner(opts);
 
         Instascan.Camera.getCameras().then(function (cameras) {
-            const backCamera = cameras.find(camera => camera.name.includes('back'));
-            if (backCamera) {
-                scanner.start(backCamera);
-            } else if (cameras.length > 0) {
-                // If back camera is not available, fallback to the first available camera
-                scanner.start(cameras[2]);
+            if (cameras.length > 0) {
+                cameras.forEach(function (camera) {
+                    scanner.start(camera); // Start scanning with the specified camera
+                });
             } else {
                 console.error('No cameras found.');
                 alert("No cameras found.");
