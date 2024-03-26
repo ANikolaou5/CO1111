@@ -71,12 +71,11 @@
     const answerInput = document.getElementById("answer-input");
     let skip = document.getElementById("skipButton");
     let scoreDiv = document.getElementById("score");
-    var sessionId = null;
     let url = new URLSearchParams(location.search);
 
-    // if (url.has('session')) {
-    //     sessionId = url.get('session');
-    // }
+    if (url.has('session')) {
+        sessionId = url.get('session');
+    }
     // let cookie_sessionId = getCookie('session_id');
     //
     // console.log('sessionId: '+sessionId);
@@ -165,8 +164,6 @@
 
     function getQuestion(){
         getScore();
-        console.log("getQuestion - sessionId: ",sessionId);
-        console.log(`https://codecyprus.org/th/api/question?session=${encodeURIComponent(sessionId)}`);
         fetch(`https://codecyprus.org/th/api/question?session=${encodeURIComponent(sessionId)}`)
             .then(response => response.json())
             .then(jsonObject => {
