@@ -24,7 +24,7 @@
 <div class="content-container">
     <div class="content">
         <span class="pirate">
-                <img id="pirateImg" src="pirate.png" alt="Pirate">
+                <img id="pirateImg" src="catPirate.png" alt="Pirate">
                 <span class="pirateText" id="pirateText"></span>
         </span>
 
@@ -42,9 +42,9 @@
 
 <script>
 
-    if (getCookie('team_name') !== "" && getCookie('session_id') !== "") {
-        window.location.href = `question.html`;
-    }
+    // if (getCookie('team_name') !== "" && getCookie('session_id') !== "") {
+    //     window.location.href = `question.html`;
+    // }
 
     let goBack_button = document.getElementById("goBack_button");
     goBack_button.addEventListener("click", function() {

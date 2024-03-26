@@ -55,7 +55,7 @@
     <form id="answer-form">
         <input id="answer-input" type="text" placeholder="Your answer..." required />
         <div id="buttons">
-            <!--            here will go dynamically added buttons (true/false and etc)-->
+            <!--here will go dynamically added buttons (true/false and etc)-->
         </div>
         <button type="button" id="skipButton" style="display: none;">Skip Question</button>
     </form>
@@ -74,20 +74,20 @@
     var sessionId = null;
     let url = new URLSearchParams(location.search);
 
-    if (url.has('session')) {
-        sessionId = url.get('session');
-    }
-    let cookie_sessionId = getCookie('session_id');
-
-    console.log('sessionId: '+sessionId);
-    console.log('cookie_sessionId: '+cookie_sessionId);
-
-    if (sessionId == null && cookie_sessionId !== "") {
-        location.href= 'question.html?session='+cookie_sessionId;
-    }
-    else if (sessionId == null && cookie_sessionId == "") {
-        location.href = 'loginPage.html';
-    }
+    // if (url.has('session')) {
+    //     sessionId = url.get('session');
+    // }
+    // let cookie_sessionId = getCookie('session_id');
+    //
+    // console.log('sessionId: '+sessionId);
+    // console.log('cookie_sessionId: '+cookie_sessionId);
+    //
+    // if (sessionId == null && cookie_sessionId !== "") {
+    //     location.href= 'question.html?session='+cookie_sessionId;
+    // }
+    // else if (sessionId == null && cookie_sessionId == "") {
+    //     location.href = 'loginPage.html';
+    // }
 
     let scanner;
 
