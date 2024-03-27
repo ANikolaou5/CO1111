@@ -7,10 +7,12 @@
     font-family: Papyrus, fantasy;
 }
 
-.logo {
+.logo, .logo_index, .logo_app {
     width: 10%;
     height: auto;
 }
+
+
 
 #header {
     background-color: #c7b198;
@@ -451,6 +453,16 @@ hr {
 
     .logo {
         width: 30% !important;
+        float: right;
+    }
+
+    .logo_index {
+        width: 50% !important;
+        float: left;
+    }
+
+    .logo_app {
+        width: 26% !important;
         float: right;
     }
 

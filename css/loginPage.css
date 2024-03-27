@@ -49,7 +49,7 @@ body {
 
 /*pirate image*/
 
-#pirateImg{
+#pirateImg_login{
     width: 30%;
     height: auto;
 }
@@ -68,6 +68,22 @@ body {
 /*MEDIA*/
 
 @media (max-width: 768px) {
+
+    .pirateText {
+        font-size: 15px !important;
+        margin-top: -150px !important;
+        margin-left: 20px;
+    }
+
+    #pirateImg_login {
+        width: 65%;
+        margin-right: 100px;
+
+    }
+
+    #startForm {
+        width: 300px !important;
+    }
 
     .content-container {
         padding: 20px;
@@ -126,7 +142,7 @@ body {
 }
 
 #submit {
-    background-color: #4caf50;
+    background-color: rebeccapurple;
     color: white;
     border: none;
     cursor: pointer;
@@ -134,7 +150,7 @@ body {
 }
 
 #submit:hover {
-    background-color: #45a049;
+    background-color: #280137;
 }
 
 #startForm h4 {
