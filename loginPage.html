@@ -10,7 +10,7 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!--    <script src="js/cookie.js"></script>-->
+    <script src="js/cookie.js"></script>
 </head>
 <body>
 <section id="header" class="arrow-icon">
@@ -42,20 +42,20 @@
 
 <script>
 
-    // if (getCookie('team_name') !== "" && getCookie('session_id') !== "") {
-    //     window.location.href = `question.html`;
-    // }
-    //
-    // let goBack_button = document.getElementById("goBack_button");
-    // goBack_button.addEventListener("click", function() {
-    //     window.history.back();
-    // });
-    //
-    // let refresh_button = document.getElementById("refresh_button");
-    // refresh_button.addEventListener('click', function() {
-    //     // Reload the page
-    //     location.reload();
-    // });
+    if (getCookie('team_name') !== "" && getCookie('session_id') !== "") {
+        window.location.href = `question.html`;
+    }
+
+    let goBack_button = document.getElementById("goBack_button");
+    goBack_button.addEventListener("click", function() {
+        window.history.back();
+    });
+
+    let refresh_button = document.getElementById("refresh_button");
+    refresh_button.addEventListener('click', function() {
+        // Reload the page
+        location.reload();
+    });
 
 
     checkTreasureHuntId();

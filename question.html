@@ -11,7 +11,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!--    <script src="js/cookie.js"></script>-->
+    <script src="js/cookie.js"></script>
 </head>
 <body>
 <section id="header" class="arrow-icon">
@@ -75,17 +75,17 @@
     if (url.has('session')) {
         sessionId = url.get('session');
     }
-    // let cookie_sessionId = getCookie('session_id');
-    //
-    // console.log('sessionId: '+sessionId);
-    // console.log('cookie_sessionId: '+cookie_sessionId);
-    //
-    // if (sessionId == null && cookie_sessionId !== "") {
-    //     location.href= 'question.html?session='+cookie_sessionId;
-    // }
-    // else if (sessionId == null && cookie_sessionId == "") {
-    //     location.href = 'loginPage.html';
-    // }
+    let cookie_sessionId = getCookie('session_id');
+
+    console.log('sessionId: '+sessionId);
+    console.log('cookie_sessionId: '+cookie_sessionId);
+
+    if (sessionId == null && cookie_sessionId !== "") {
+        location.href= 'question.html?session='+cookie_sessionId;
+    }
+    else if (sessionId == null && cookie_sessionId == "") {
+        location.href = 'loginPage.html';
+    }
 
     function QRCode() {
         document.getElementById('QRCodeId').style.display = 'block';
