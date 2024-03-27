@@ -8,8 +8,8 @@ What was discussed: We worked on Worksheet 10, read, and analyzed the brief and 
 
 **15/12/2023:**
 Who was there: Antri, Alena, Eleana, Antreas
-What was discussed: We worked on “Worksheet 11” and discussed our marketing plans. Eleana is responsible for creating a twitter account 
-and Antreas is responsible for creating a google analytics account.
+What was discussed: We worked on “Worksheet 11” and discussed our marketing plans. Eleana is responsible for creating a Twitter account 
+and Antreas is responsible for creating a Google Analytics account.
 
 **19/01/2024:**
 Who was there: Antri, Alena, Eleana, Antreas
@@ -30,7 +30,7 @@ style leaderboard.html and Antreas' task is to add the alert message when the us
 
 **28/02/2024:**
 Who was there: Antri, Alena, Eleana, Antreas
-What was discussed: Checked that everyone successfully completed their previous tasks to submit Milestone 2’. Discussed about how the 
+What was discussed: Checked that everyone successfully completed their previous tasks to submit Milestone 2’. Discussed how the 
 treasure hunt questions and leaderboard button are going to be shown in our app and until next meeting Alena's task is to add the leaderboard 
 button, Antri’s task is to create a testing page, Eleana's task is to add the treasure hunt questions and Antreas' task is to implement 
 functionality that enables the user to provide a name and then join a treasure hunt.
