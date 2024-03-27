@@ -165,16 +165,16 @@ body {
     align-items: center;
     justify-content: center;
     padding: 8px;
-    margin: 0 auto 20px; /* Adjusted margin for better spacing */
+    margin: 0 auto 20px;
     background-color: #fffdd0;
     border: 5px solid darkred;
-    flex-wrap: wrap; /* Allows elements to wrap in smaller screens */
-    gap: 10px; /* Adds space between the stars and the text */
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-#leaderboardTitle img.star { /* Ensure the star images are styled correctly */
-    width: 8%; /* Adjust size as necessary */
-    min-width: 30px; /* Prevents stars from becoming too small */
+#leaderboardTitle img.star {
+    width: 8%;
+    min-width: 30px;
 }
 
 #leaderboardTable {
@@ -377,6 +377,10 @@ th, td {
 }
 
 @media screen and (max-width: 600px) {
+
+    #question-container {
+        width: 320px;
+    }
     #leaderboardTitle {
         width: 65% !important;
         flex-wrap: revert;
@@ -398,9 +402,6 @@ th, td {
         margin-right: 5px;
     }
 
-    .LBButton::before {
-        content: '';
-    }
 }
 
 

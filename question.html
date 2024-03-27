@@ -435,13 +435,27 @@
         html += `<tr><td>${index + 1}</td><td class="name-column" data-full-name="${entry.player}" onclick="toggleFullName(event)">${displayName}</td><td>${entry.score}</td><td>${time} minutes</td></tr>`;
     });
     html += '</table>';
-
-
-
-
-
-
 </script>
+
+<!--Script for the buttons resizing-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function updateButtonText() {
+
+            if (window.innerWidth <= 600) {
+                document.getElementById("buttonLB").textContent = "LB";
+                document.getElementById("buttonQR").textContent = "QR";
+            } else {
+                document.getElementById("buttonLB").textContent = "Leaderboard";
+                document.getElementById("buttonQR").textContent = "Click to scan";
+            }
+        }
+        updateButtonText();
+
+        window.addEventListener('resize', updateButtonText);
+    });
+</script>
+
 </body>
 </html>
 
