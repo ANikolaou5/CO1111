@@ -328,6 +328,10 @@ th, td {
     text-overflow: ellipsis;
 }
 
+.logo_question {
+    width: 6%;
+}
+
 /*.clickable-name {*/
 /*    cursor: pointer;*/
 /*    text-overflow: ellipsis;*/
@@ -358,6 +362,9 @@ th, td {
 /*MEDIA*/
 
 @media (max-width: 768px) {
+    .logo_question {
+        width: 17% !important;
+    }
 
     #header .logo {
         width: 16vh;
