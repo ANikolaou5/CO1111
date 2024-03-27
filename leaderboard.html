@@ -8,7 +8,6 @@
     <link rel="icon" href="teamLogo(1).png" type="image/x-icon" />
     <!--    <meta name="msapplication-TileImage" content="teamLogo(1).png">-->
     <link rel="stylesheet" href="css/leaderboard.css">
-    <link rel="stylesheet" href="css/style1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="js/cookie.js"></script>
 </head>
@@ -50,13 +49,15 @@
         let index= 1;
         for (const entry of leaderboardArray) {
             var time = Math.round(entry['completionTime'] / 60000);
+            let displayText = entry['player'].length > 30 ? entry['player'].slice(0, 30) + '...' : entry['player'];  /*substring is from the source:https://javascript.plainenglish.io/javascript-get-first-n-characters-of-string-36b5425d6890*/
             html += "<tr>" +
-                "<td>" + index + ".  " + entry['player'].substring(0,60) + "</td>" +   /*substring is from the source:https://javascript.plainenglish.io/javascript-get-first-n-characters-of-string-36b5425d6890*/
+                "<td>" + index + ".  " + displayText + "</td>" +
                 "<td>" + entry['score'] + "</td>" +
                 "<td>" + time + " minutes" + "</td>" +
                 "</tr>";
             index++;
         }
+        html += '</table>';
         let leaderboardElement = document.getElementById('leaderboardTable');
         leaderboardElement.innerHTML += html;
     }
@@ -64,7 +65,13 @@
     function getLeaderBoard() {
         fetch(`https://codecyprus.org/th/api/leaderboard?session=${sessionId}`)
             .then(response => response.json())
-            .then(json => handleLeaderboard(json));
+            .then(data => {
+                handleLeaderboard(data);
+            })
+            .catch(error => {
+                console.error('Error fetching leaderboard:', error);
+                document.getElementById('leaderBoardContent').innerHTML = 'Failed to load leaderboard.';
+            });
     }
 
     getLeaderBoard();

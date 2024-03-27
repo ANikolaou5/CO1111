@@ -72,7 +72,6 @@
                         listItem.style.opacity = "0.5";
                     }
                     listItem.addEventListener("click", function () {
-                        alert("Starting treasure hunt: " + treasureHuntsArray[i].name);
                         window.location.href = `loginPage.html?treasure-hunt-name=${treasureHuntsArray[i].name}&treasure-hunt-id=${treasureHuntsArray[i].uuid}`;
                     });
                 }

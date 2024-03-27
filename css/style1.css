@@ -3,7 +3,8 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Tahoma, sans-serif;
+    font-weight: bold;
+    font-family: Papyrus, fantasy;
 }
 
 .logo {
@@ -440,21 +441,6 @@ hr {
     text-decoration: none;
     cursor: pointer;
 }
-
-/*#loading-screen {*/
-
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    left: 50%;*/
-/*    transform: translate(-50%, -50%);*/
-/*    width: 100px;*/
-/*    height: 100px;*/
-/*}*/
-
-/*#loading-screen img {*/
-/*    width: 70%;*/
-/*    height: 70%;*/
-/*}*/
 
 /*MEDIA*/
 
