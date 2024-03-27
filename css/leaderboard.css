@@ -104,10 +104,28 @@
     justify-content: center;
 }
 
-
 @media (max-width: 768px) {
     .logo {
-        width: 10% !important;
-        float: right;
+        width: 20%;
+        padding-left: 20px;
+    }
+
+    #header {
+        padding: 5px 10px;
+    }
+
+    #leaderboardTitle {
+        width: 95%;
+        font-size: 16px;
+    }
+
+    #leaderboardTable {
+        width: 95%;
+        font-size: 10px;
+    }
+
+    #leaderboardTable th,
+    #leaderboardTable td {
+        font-size: 12px;
     }
 }
